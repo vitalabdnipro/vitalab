@@ -1,0 +1,30 @@
+.root {
+}
+
+.headerContainer {
+  --row-gap: var(--row-gap-medium);
+  --padding-left: var(--column-padding-normal);
+  --padding-right: var(--column-padding-medium);
+  --header-padding-left: var(--padding-left);
+  --header-padding-right: var(--padding-right);
+  --header-max-width: var(--copy-max-width);
+
+  display: grid;
+  row-gap: var(--row-gap);
+  scroll-margin-top: var(--fixed-nav-scroll-margin);
+  letter-spacing: 0.2px;
+}
+
+.header {
+  display: grid;
+  row-gap: var(--row-gap);
+  position: relative;
+  padding: 0 var(--header-padding-right) 0 var(--header-padding-left);
+  max-width: var(--header-max-width);
+}
+
+.articleList {
+  @media (min-width: 768px) {
+    --row-layout-gap: var(--row-layout-gap-xsmall);
+  }
+}

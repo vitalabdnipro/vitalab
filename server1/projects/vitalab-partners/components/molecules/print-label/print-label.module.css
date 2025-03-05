@@ -1,0 +1,12 @@
+.label:after {
+  @apply absolute top-0 bottom-0 -right-[0px] z-[1] block w-px bg-gray-200 content-[''];
+}
+.label:hover:after {
+  @apply bg-gray-300;
+}
+.plus:before {
+  @apply absolute top-0 bottom-0 -left-[1px] z-[1] block w-px bg-gray-300 content-[''];
+}
+.label:hover:before {
+  @apply bg-gray-300;
+}

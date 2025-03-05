@@ -1,0 +1,165 @@
+.root {
+  --carousel-offset-left: var(--column-padding-normal);
+  --carousel-item-count: 10;
+  --carousel-overflow-padding-top: 24px;
+  --carousel-overflow-padding-bottom: 48px;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .root {
+    --carousel-offset-left: 40px;
+  }
+}
+
+.container {
+  width: calc(100% + var(--carousel-offset-left) * 2);
+  margin-left: calc(var(--carousel-offset-left) * -1);
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--carousel-offset-left),
+    #000 calc(100% - var(--carousel-offset-left)),
+    transparent
+  );
+}
+
+/* .track { */
+.carousel {
+  /* display: flex; */
+  overflow-x: scroll;
+  flex-direction: row;
+  margin: calc(var(--carousel-overflow-padding-top) * -1) 0
+    calc(var(--carousel-overflow-padding-bottom) * -1);
+  padding: var(--carousel-overflow-padding-top) 0
+    var(--carousel-overflow-padding-bottom) 0;
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.nav {
+  --carousel-nav-current-index: 0;
+  --carousel-nav-item-count: 10;
+  --carousel-desktop-nav-height: 8px;
+  --carousel-desktop-nav-button-height: 40px;
+  --newsroomIndexCarouselMobileNavHeight: 40px;
+  margin-top: 48px;
+}
+
+.desktopNav {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--carousel-item-count), 1fr);
+  width: 100%;
+  height: 8px;
+  background: #e7ecf1;
+  transform: scaleY(0.5);
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+
+  &:hover {
+    transform: scaleY(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .desktopNav {
+    display: none;
+  }
+}
+
+.button {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  height: var(--carousel-desktop-nav-button-height);
+  margin-top: calc(
+    var(--carousel-desktop-nav-button-height) / -2 -
+      var(--carousel-desktop-nav-height) / -2
+  );
+  z-index: 1;
+  border-radius: 0;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: var(--carousel-desktop-nav-height);
+    left: 0;
+    top: calc(
+      var(--carousel-desktop-nav-button-height) / 2 -
+        var(--carousel-desktop-nav-height) / 2
+    );
+    opacity: 0;
+  }
+
+  &:before {
+    background: #e7ecf1;
+    filter: brightness(0.97);
+    transition: opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  &:after {
+    box-shadow: var(--focus-box-shadow);
+    opacity: 0;
+  }
+}
+
+.line {
+  --gradientColorZero: #a960ee;
+  --gradientColorOne: #ff333d;
+  --gradientColorTwo: #90e0ff;
+  --gradientColorThree: #ffcb57;
+  --carousel-nav-line-column-width: calc(
+    var(--layout-width) / var(--carousel-nav-item-count)
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  transform: translateX(calc(var(--carousel-nav-current-index) * 100%));
+  overflow: hidden;
+  width: calc(var(--carousel-nav-line-column-width));
+  will-change: transform;
+  transition: all 1s ease;
+
+  &:before {
+    content: "";
+    position: absolute;
+    transform: translateX(
+      calc(
+        var(--carousel-nav-current-index) * -100% / var(--carousel-item-count)
+      )
+    );
+    display: block;
+    width: calc(
+      var(--carousel-nav-line-column-width) * var(--carousel-item-count)
+    );
+    height: 100%;
+    /* background: linear-gradient(
+      90deg,
+      theme("backgroundColor.gray.200"),
+      #ea580c,
+      theme("backgroundColor.gray.200")  */
+      /* #f9cb28 */
+        /* var(--gradientColorZero),
+      var(--gradientColorOne) 33%,
+      var(--gradientColorTwo) 66%,
+      var(--gradientColorThree) */
+    /* ); */
+    /* background: theme("backgroundColor.gray.400"); */
+    background: #ea580c;
+  }
+}

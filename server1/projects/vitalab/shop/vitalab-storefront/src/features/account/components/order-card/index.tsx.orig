@@ -1,0 +1,248 @@
+import { useMemo, useState } from "react"
+import Link from "next/link"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@components/atoms/accordion"
+import { Button } from "@components/atoms/button"
+import { Text } from "@components/atoms/text"
+import * as Tooltip from "@components/atoms/tooltip"
+import type { Order } from "@medusajs/medusa"
+import { trpc } from "@utils/trpc"
+import { Eye, Info } from "lucide-react"
+// import Button from "@modules/common/components/button"
+import { formatAmount } from "medusa-react"
+
+import { OrderStatus } from "../order-status"
+import { OrderStatusDot } from "../order-status-dot"
+
+type OrderCardProps = {
+  order: Omit<Order, "beforeInsert">
+}
+
+const OrderCard = ({ order }: OrderCardProps) => {  
+  const { data, isLoading } = trpc.order.get.useQuery({
+    id: (3330000000 + order.display_id).toString(),
+  })
+  //const [ ready, setReady ] = useState(false)
+
+  const numberOfLines = useMemo(() => {
+    return order.items
+      .filter((item) => item.variant.product.metadata.category.code !== 14)
+      .reduce((acc, item) => {
+        return acc + item.quantity
+      }, 0)
+  }, [order])
+
+  const numberOfProducts = useMemo(() => {
+    return order.items.length
+  }, [order])
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (!data?.data[0]) {
+    return <div>Not found</div>
+  }
+
+  const isReady = data.data[0].forms.every(
+    (form: any) => form.status === "created"
+  )
+
+  return (
+    <div className="relative flex flex-1 items-stretch">
+      {/* <span className="absolute left-2 top-2 flex h-3 w-3">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+        <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
+      </span> */}
+      <Tooltip.Provider>
+        <Tooltip.Root delayDuration={300}>
+          <Tooltip.Trigger asChild>
+            <OrderStatusDot
+              state={isReady ? "fulfilled" : "processing"}
+              className="left-2 top-2"
+            />
+          </Tooltip.Trigger>
+          <Tooltip.Content>
+            Статуc:{" "}
+            <span className="font-semibold">
+              {isReady ? "Готово" : "В обробці"}
+            </span>
+          </Tooltip.Content>
+        </Tooltip.Root>
+      </Tooltip.Provider>
+      <div className="flex min-h-[180px] w-full max-w-full flex-col justify-end rounded-[5px] bg-white pt-3 shadow-[0_0_0_1px_rgba(0,0,0,0.04),_0_4px_12px_rgba(0,0,0,0.08),0_2px_4px_rgba(0,0,0,0.06)] transition-shadow duration-200">
+        <div className="h mx-4 mt-2 flex flex-initial flex-col items-stretch justify-start gap-1 pb-3">
+          <div className="flex items-center">
+            <Text as="p" size="md" weight="semibold">
+              #{3330000000 + order.display_id}
+            </Text>
+            <Info className="ml-2 h-4 w-4" />
+          </div>
+          <div className="flex flex-row items-center gap-x-2">
+            <Text as="p" size="xs" weight="default">
+              {new Date(order.created_at).toLocaleDateString("uk-UA", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </Text>
+            {/* <div className="text-xs">{order.total / 100} грн</div> */}
+            <div className="flex items-center text-xs">
+              {`${numberOfLines} ${numberOfLines > 1 ? "аналізів" : "аналіз"}`}
+            </div>
+          </div>
+          <div className="flex items-center"></div>
+        </div>
+        <div className="p-2">
+          {/* <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full rounded-b-md bg-gray-50"
+                >
+                  <span class="relative flex h-3 w-3">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+                    <span class="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>                    
+                  </span>
+                  результати
+                </Button> */}
+          {/* <button class="h-7.5 text-primary relative inline-flex w-full items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-semibold leading-none text-neutral-800 shadow-[0px_0px_0px_0.5px_rgb(0_0_0_/_0.08),_0px_1px_0px_rgb(0_0_0_/_0.06),_0px_1px_2px_rgb(0_0_0_/_0.05),_0px_2px_4px_rgb(0_0_0_/_0.04),_0px_4px_8px_rgb(0_0_0_/_0.03),_0px_2px_12px_rgb(0_0_0_/_0.02),_inset_0px_1px_0px_rgb(255_255_255),_inset_0px_1px_0px_rgb(255_255_255_/_0.94),_inset_0px_0px_2px_1px_rgb(255_255_255)] [text-shadow:0px_1px_0px_rgb(255_255_255_/_0.8)] after:absolute after:inset-0 after:block after:rounded-md after:bg-gradient-to-t after:from-black/5 after:opacity-75 after:transition-opacity hover:after:opacity-100">
+                  <span class="relative flex h-3 w-3">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+                    <span class="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
+                  </span>
+                  результати
+                </button> */}
+          <OrderStatus order={data} isReady={isReady} />
+        </div>
+      </div>
+    </div>
+    // <div className="flex flex-col bg-white">
+    //   <div className="flex items-center justify-between">
+    //     <div className="text-large-semi mb-1 uppercase">
+    //       #{order.display_id}
+    //     </div>
+    //     <Button variant="arrow" size="dimensionless" disabled>
+    //       Результат{" "}
+    //       <svg
+    //         class="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+    //         fill="none"
+    //         width="10"
+    //         height="10"
+    //         viewBox="0 0 10 10"
+    //         aria-hidden="true"
+    //       >
+    //         <path
+    //           class="opacity-0 transition group-hover:opacity-100"
+    //           d="M0 5h7"
+    //         ></path>
+    //         <path
+    //           class="transition group-hover:translate-x-[3px]"
+    //           d="M1 1l4 4-4 4"
+    //         ></path>
+    //       </svg>
+    //     </Button>
+    //   </div>
+    //   <div className="text-small-regular flex items-center divide-x divide-gray-200 text-gray-700">
+    //     <span className="pr-2">
+    //       {new Date(order.created_at).toLocaleDateString("uk-UA", {
+    //         year: "numeric",
+    //         month: "long",
+    //         day: "numeric",
+    //       })}
+    //     </span>
+    //     <span className="px-2">
+    //       {order.total / 100} грн
+    //       {/* {formatAmount({
+    //         amount: order.total,
+    //         region: order.region,
+    //         includeTaxes: false,
+    //       })} */}
+    //     </span>
+    //     <span className="pl-2">{`${numberOfLines} ${
+    //       numberOfLines > 1 ? "аналізів" : "аналіз"
+    //     }`}</span>
+    //   </div>
+    //   <div className="grid gap-2">
+    //     {numberOfProducts > 1 ? (
+    //       <Accordion type="single" collapsible>
+    //         <AccordionItem value="item-1" className="border-none">
+    //           <AccordionTrigger className="justify-start text-xs font-semibold">
+    //             Переглянути список аналізів
+    //           </AccordionTrigger>
+    //           {order.items
+    //             .sort((a, b) => {
+    //               // return a.created_at > b.created_at ? -1 : 1
+    //               if (
+    //                 a.variant.product.metadata?.category?.code === 14 &&
+    //                 b.variant.product.metadata?.category?.code !== 14
+    //               ) {
+    //                 return 1
+    //               } else if (
+    //                 a.variant.product.metadata?.category?.code !== 14 &&
+    //                 b.variant.product.metadata?.category?.code === 14
+    //               ) {
+    //                 return -1
+    //               } else {
+    //                 return a.created_at > b.created_at ? -1 : 1
+    //               }
+    //             })
+    //             .map((i, index) => (
+    //               <AccordionContent>
+    //                 <div key={i.id} className="flex flex-col gap-y-2">
+    //                   <div className="text-small-regular flex items-center text-gray-700">
+    //                     <span className="font-medium text-gray-900">
+    //                       {index + 1}. {i.title}
+    //                     </span>
+    //                     <span className="ml-2">x</span>
+    //                     <span>{i.quantity}</span>
+    //                   </div>
+    //                 </div>
+    //               </AccordionContent>
+    //             ))}
+    //         </AccordionItem>
+    //       </Accordion>
+    //     ) : (
+    //       <div className="mt-4 flex flex-col gap-y-2">
+    //         <div className="text-small-regular flex items-center text-gray-700">
+    //           <span className="font-semibold text-gray-900">
+    //             {order.items[0]?.title}
+    //           </span>
+    //           <span className="ml-2">x</span>
+    //           <span>{order.items[0]?.quantity}</span>
+    //         </div>
+    //       </div>
+    //     )}
+    //     {/* {order.items.slice(0, 3).map((i) => {
+    //       return (
+    //         <div key={i.id} className="flex flex-col gap-y-2">
+    //           <div className="text-small-regular flex items-center text-gray-700">
+    //             <span className="font-semibold text-gray-900">{i.title}</span>
+    //             <span className="ml-2">x</span>
+    //             <span>{i.quantity}</span>
+    //           </div>
+    //         </div>
+    //       )
+    //     })}
+    //     {numberOfProducts > 4 && (
+    //       <div className="flex h-full w-full flex-col items-center justify-center">
+    //         <span className="text-small-regular text-gray-700">
+    //           + {numberOfLines - 4}
+    //         </span>
+    //         <span className="text-small-regular text-gray-700">more</span>
+    //       </div>
+    //     )} */}
+    //   </div>
+    //   {/* <div className="flex justify-end">
+    //     <Link href={`/order/details/${order.id}`}>
+    //       <Button variant="secondary">See details</Button>
+    //     </Link>
+    //   </div> */}
+    // </div>
+  )
+}
+
+export default OrderCard

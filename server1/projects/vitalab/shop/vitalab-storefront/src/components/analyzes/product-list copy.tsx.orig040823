@@ -1,0 +1,222 @@
+import { useMemo, useState } from "react"
+import { Card, Tooltip } from "@components/ui"
+import { InformationCircleIcon } from "@heroicons/react/24/outline"
+import { useStore } from "@lib/context/store-context"
+import { useAddItem } from "@lib/hooks/use-add-Item"
+import useProductPrice from "@lib/hooks/use-product-price"
+import { useCartStore } from "@lib/store/cart"
+import Spinner from "@modules/common/icons/spinner"
+import { cn } from "@utils/cn"
+import clsx from "clsx"
+import { Loader2 } from "lucide-react"
+import { useCart } from "medusa-react"
+import { api } from "utils/api"
+
+const Button = ({ children, loading, ...props }) => (
+  <button
+    className="group inline-flex h-9 w-full items-center justify-center rounded-full bg-emerald-700 py-1.5 text-[15px] font-medium text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-zinc-200 disabled:text-gray-600"
+    {...props}
+  >
+    {!loading ? children : <Loader2 className="ml-2 h-5 w-5 animate-spin" />}
+  </button>
+)
+
+const ProductCard = ({ data, loading, setLoading }) => {
+  const {
+    product,
+    calculated_price,
+    original_price,
+    price_type,
+    percentage_diff,
+  } = data
+  const { storeCart } = useStore()
+  const { cart, setCart } = useCart()
+  // const mutation = useAddItem();
+  const mutation = api.cart.add.useMutation({
+    onSuccess: (cart) => {
+      setCart(cart)
+      storeCart(cart.id)
+      setLoading(false)
+      // timedOpen();
+    },
+  })
+
+  // const price = useProductPrice({
+  //   id: data.id,
+  //   variantId: data.variants[0]?.id,
+  // });
+
+  // const selectedPrice = useMemo(() => {
+  //   const { variantPrice, cheapestPrice } = price;
+
+  //   return variantPrice || cheapestPrice || null;
+  // }, [price]);
+
+  if (!cart?.id) {
+    return <div className="">...</div>
+  }
+
+  const inCart = cart?.items.some(
+    (item) => item.variant.product.id === product.id
+  )
+
+  return (
+    // <Link href={`/analysis/${data.handle}`} passHref>
+    //background-image: linear-gradient(165deg,var(--start-color),var(--end-color));
+    <>
+      {/* {selectedPrice && ( */}
+      <div className="relative">
+        {price_type === "sale" && percentage_diff > 11 && (
+          <div
+            className={clsx(
+              "absolute -z-[2] h-full w-full rounded-[8px] bg-gradient-to-r from-[#ff4d4d] to-[#f9cb28]",
+              {
+                "before:absolute before:h-full before:w-full before:border-[12px] before:bg-gradient-to-r before:from-[#ff4d4d] before:to-[#f9cb28] before:blur-lg":
+                  price_type === "sale" && percentage_diff > 11,
+              }
+            )}
+          >
+            {/* <div className="absolute -right-1.5 top-[calc(80%/2)] -rotate-90 transform font-medium text-gray-700">
+            Акція
+          </div> */}
+          </div>
+        )}
+        <Card
+          className={cn(
+            "min-h-[20px] border border-gray-200 bg-white bg-gradient-to-r from-[hsla(0,0%,100%,.8)] to-[hsla(0,0%,100%,.8)] bg-clip-padding transition ease-hover md:h-[125px]",
+            {
+              "!border-transparent": percentage_diff > 11,
+            }
+          )}
+        >
+          {/* {selectedPrice ? ( */}
+          <div className="grid h-full gap-x-6 md:grid-cols-[1fr_150px]">
+            <div className="flex-col items-center gap-x-2 p-4">
+              <div className="flex flex-row items-center gap-x-3">
+                <div className="text-xs text-gray-400">
+                  # {product?.mid_code}
+                </div>
+                {product.description && (
+                  <Tooltip
+                    content={product.description}
+                    className="max-h-40 w-[600px] rounded-lg border border-gray-200 bg-white p-4 text-s shadow-sm"
+                    sideOffset={7}
+                  >
+                    <InformationCircleIcon className="h-5 w-5 text-gray-400 transition ease-hover hover:text-gray-800" />
+                  </Tooltip>
+                  //
+                )}
+                {price_type === "sale" && percentage_diff > 11 ? (
+                  <>
+                    <span className="inline-flex items-center rounded bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">
+                      Акція
+                    </span>
+                    {/* <span className="inline-flex items-center rounded bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">
+                      {percentage_diff}%
+                    </span> */}
+                  </>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+              <div className="mt-2">
+                <h4 className="text-sm font-semibold text-slate-800">
+                  {product.title}
+                </h4>
+              </div>
+              {/* <div className="mt-2 flex flex-row ">
+            <InformationCircleIcon className="h-5 w-5" />
+          </div> */}
+            </div>
+            <div className="h-full items-center p-1">
+              <div
+                className={clsx(
+                  "flex p-2 md:p-0 md:flex-col items-center justify-start h-full justify-center",
+                  {
+                    "h-full rounded bg-white p-2": price_type === "sale",
+                  }
+                )}
+              >
+                <div className="flex w-full items-center md:flex-col md:justify-center">
+                  {price_type === "sale" ? (
+                    <span className="mr-2 font-normal text-gray-400 line-through md:mb-1 md:mr-0">
+                      {original_price / 100}
+                    </span>
+                  ) : (
+                    <div className="h-[26px]"></div>
+                  )}
+                  <div className="text-lg font-semibold leading-none text-slate-900 md:mb-4">
+                    {`${calculated_price / 100} грн`}
+                  </div>
+                </div>
+                {/* {!mutation.isLoading ? ( */}
+                <div className="flex w-full">
+                  {!inCart ? (
+                    // <Button
+                    //   type="primary"
+                    //   loading={mutation.isLoading}
+                    //   disabled={loading}
+                    //   onClick={() => {
+                    //     setLoading(true)
+                    //     mutation.mutate({
+                    //       cartId: cart?.id,
+                    //       manipulationId: product.metadata?.manipulation_id,
+                    //       variantId: product.variants[0].id,
+                    //     })
+                    //   }}
+                    // >
+                    //   Замовити
+                    // </Button>
+                    <Button
+                      loading={mutation.isLoading}
+                      disabled={loading}
+                      onClick={() => {
+                        console.log("test")
+                        setLoading(true)
+                        mutation.mutate({
+                          cartId: cart?.id,
+                          manipulationId: product.metadata?.manipulation_id,
+                          variantId: product.variants[0].id,
+                        })
+                      }}
+                    >
+                      Замовити
+                    </Button>
+                  ) : (
+                    <Button disabled>У кошику</Button>
+                  )}
+                </div>
+                {/* {mutation.error && (
+            <p>Something went wrong! {mutation.error.message}</p>
+          )} */}
+              </div>
+            </div>
+          </div>
+          {/* ) : (
+        <div>Loading...</div>
+      )} */}
+        </Card>
+      </div>
+      {/* )} */}
+    </>
+    // </Link>
+  )
+}
+
+const ProductList = ({ analyzes }) => {
+  const [loading, setLoading] = useState(false)
+
+  return analyzes.map((item) => {
+    console.log("item", item)
+    return (
+      <ProductCard
+        key={item.title}
+        data={item}
+        loading={loading}
+        setLoading={setLoading}
+      />
+    )
+  })
+}
+
+export default ProductList

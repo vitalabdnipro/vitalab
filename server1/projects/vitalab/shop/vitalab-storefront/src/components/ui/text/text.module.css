@@ -1,0 +1,123 @@
+.body {
+  @apply text-base leading-7 max-w-6xl mx-auto;
+}
+
+.heading {
+  --title-padding-left: var(--column-padding-normal);
+  --title-padding-right: var(--column-padding-medium);
+  --title-line-height: 1.263157895;
+  --title-letter-spacing: -0.2px;
+
+  position: relative;
+  padding: 0 theme("padding.4") 0 theme("padding.4");
+  font-family: var(--font-family);
+  font-weight: theme("fontWeight.semibold");
+  font-size: theme("fontSize.4xl");
+  line-height: var(--title-line-height);
+  color: var(--title-color);
+  letter-spacing: var(--title-letter-spacing, 0.2px);
+}
+
+.variantSection {
+
+}
+
+.pageHeading {
+  @apply pt-1 pb-4 text-2xl leading-7 font-bold tracking-wide;
+}
+
+.sectionHeading {
+  @apply pt-1 pb-2 text-2xl font-bold tracking-wide cursor-pointer mb-2;
+}
+
+.accentedHeading {
+  --title-padding-left: var(--column-padding-normal);
+  --title-padding-right: var(--column-padding-medium);
+  --title-font-size: theme("fontSize.m");
+  --title-line-height: 1.6;
+  --title-weight: theme("fontWeight.semibold");
+  --title-letter-spacing: 0.2px;
+  --title-border-color: var(--accent-color);
+
+  position: relative;
+  padding: 0 var(--title-padding-right) 0 var(--title-padding-left);
+  font-family: var(--font-family);
+  font-weight: var(--title-weight);
+  font-size: var(--title-font-size);
+  line-height: var(--title-line-height);
+  color: var(--title-color);
+  letter-spacing: var(--title-letter-spacing, 0.2px);
+
+  &:before {
+    display: var(--titleAnchorDisplay, block);
+    position: absolute;
+    top: calc(
+      0.5px + var(--title-line-height) * var(--title-font-size) / 2 -
+        var(--title-font-size) / 2
+    );
+    left: calc(var(--title-padding-left) - var(--column-padding-normal));
+    width: 1px;
+    height: var(--title-font-size);
+    background-color: var(--title-border-color, transparent);
+    content: "";
+  }
+}
+/* Apply base font sizes and styles for typography markup (h2, h2, ul, p, etc.).
+   A helpful addition for whenn page content is consumed from a source managed through a wysiwyg editor. */
+
+.body :is(h1, h2, h3, h4, h5, h6, p, ul, ol) {
+  @apply mb-4;
+}
+
+.body :is(h1, h2, h3, h4, h5, h6):not(:first-child) {
+  @apply mt-8;
+}
+
+.body :is(h1, h2, h3, h4, h5, h6) {
+  @apply font-semibold tracking-wide;
+}
+
+.body h1 {
+  @apply text-5xl;
+}
+
+.body h2 {
+  @apply text-4xl;
+}
+
+.body h3 {
+  @apply text-3xl;
+}
+
+.body h4 {
+  @apply text-2xl;
+}
+
+.body h5 {
+  @apply text-xl;
+}
+
+.body h6 {
+  @apply text-lg;
+}
+
+.body ul,
+.body ol {
+  @apply pl-6;
+}
+
+.body ul {
+  @apply list-disc;
+}
+
+.body ol {
+  @apply list-decimal;
+}
+
+.body a {
+  @apply underline;
+}
+
+.body a:hover {
+  @apply no-underline;
+}

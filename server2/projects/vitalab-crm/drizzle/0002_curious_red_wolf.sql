@@ -1,0 +1,1 @@
+ALTER TABLE `vitalab-cms_product` ADD `biomaterial` text;

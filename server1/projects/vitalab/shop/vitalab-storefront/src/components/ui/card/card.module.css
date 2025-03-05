@@ -1,0 +1,53 @@
+/* .root {
+  --cardBleedRightNormal: var(--columnWidth);
+  --cardBleedBottomNormal: 16px;
+  --card-shadow: none;
+  --card-shadow-margin: 0;
+  --card-min-height: 72px;
+  --card-background: #fff;
+  position: relative;
+  min-width: 100px;
+  min-height: var(--card-min-height);
+  max-width: var(--card-max-width, none);
+  margin-right: calc(var(--card-bleed-right, 0) * -1);
+  margin-bottom: calc(var(--card-bleed-bottom, 0) * -1);
+  border-radius: var(--card-border-radius);
+  background: var(--card-background);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+} */
+
+.root {
+  --cardBleedRightNormal: var(--columnWidth);
+  --cardBleedBottomNormal: 16px;
+  --card-shadow: none;
+  --card-shadow-margin: 0;
+  --card-min-height: 72px;
+  --card-background: #fff;
+  position: relative;
+  min-width: 100px;
+  min-height: var(--card-min-height);
+  max-width: var(--card-max-width, none);
+  /* margin-right: calc(var(--card-bleed-right, 0) * -1);
+  margin-bottom: calc(var(--card-bleed-bottom, 0) * -1); */
+  border-radius: var(--card-border-radius);
+  /* background: var(--card-background); */
+  /* box-shadow: theme("boxShadow.none"); */
+  overflow: hidden;
+}
+
+.shadowSmall {
+  box-shadow: theme("boxShadow.card-small");
+}
+
+.shadowMedium {
+  box-shadow: theme("boxShadow.card-medium");
+}
+
+.shadowLarge {
+  box-shadow: var(--card-shadow-large);
+}
+
+.shadowXLarge {
+  box-shadow: var(--card-shadow-xlarge);
+}

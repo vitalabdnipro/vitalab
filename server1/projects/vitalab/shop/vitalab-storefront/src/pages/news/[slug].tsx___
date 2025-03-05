@@ -1,0 +1,107 @@
+import { Layout } from "@components/common";
+import { Breadcrumbs, Button, Card, Heading, Section } from "@components/ui";
+import type { ReactElement } from "react";
+
+const PostPage = () => {
+  return (
+    <Section>
+      <div className="pb-32">
+        <Breadcrumbs />
+        <div className="grid gap-y-6 grid-areas-newsLayout md:grid-cols-4 md:gap-y-12">
+          {/* <div
+          className="section__row-layout"
+          style={
+            {
+              "--row-layout-gap": `var(--row-layout-gap-xlarge)`,
+            } as React.CSSProperties
+          }
+        > */}
+
+          <header className="col-span-3 mt-12 grid w-full max-w-[810px] gap-y-6 grid-in-hero">
+            <Heading variant="heading">Застуда чи COVID-19?</Heading>
+            <div className="px-4 text-m leading-6 text-gray-900 sm:pr-16 sm:text-lg">
+              <p>Спеціальна пропозиція</p>
+            </div>
+          </header>
+          <aside className="grid-in-meta">
+            <time className="relative px-4 text-m text-gray-700 before:absolute before:top-0.5 before:left-0 before:h-[15px] before:w-px before:bg-orange-500">
+              20 жовтня 2022 р.
+            </time>
+          </aside>
+          <section className="grid gap-y-10 grid-in-body">
+            <div className="grid gap-y-6 text-m leading-6 text-gray-900 md:text-lg">
+              <p className="px-4 sm:pr-8 md:max-w-[810px]">
+                <strong>
+                  Замовляйте пакет «Застуда чи COVID-19?» за акційною ціною!
+                </strong>
+                <br />
+                До пакету входять:
+              </p>
+              <ul className="pl-10">
+                <li className="relative pr-4 before:absolute before:top-[10px] before:-left-6 before:h-2 before:w-2 before:rounded-full before:bg-gray-400 sm:pr-8">
+                  Загальний аналіз крові
+                </li>
+                <li className="relative pr-4 before:absolute before:top-[10px] before:-left-6 before:h-2 before:w-2 before:rounded-full before:bg-gray-400 sm:pr-8">
+                  Феритин
+                </li>
+                <li className="relative pr-4 before:absolute before:top-[10px] before:-left-6 before:h-2 before:w-2 before:rounded-full before:bg-gray-400 sm:pr-8">
+                  D-Димер
+                </li>
+                <li className="relative pr-4 before:absolute before:top-[10px] before:-left-6 before:h-2 before:w-2 before:rounded-full before:bg-gray-400 sm:pr-8">
+                  C-Реактивний білок
+                </li>
+              </ul>
+            </div>
+            <Card className="bg-white" shadow="small">
+              <div className="grid items-center gap-x-6 py-6 pl-8 pr-14 md:grid-cols-[2fr_1fr]">
+                <div className="text-m">
+                  <p className="line-through">Базова ціна пакету - 594 грн.</p>
+                  <p className="mt-2 text-lg font-semibold text-slate-900">
+                    Акційна ціна пакету - 510 грн.*
+                  </p>
+                  <p>(С- реактивний білок у подарунок, за 1грн.)</p>
+                </div>
+                <div className="flex justify-end">
+                  <Button variant="solid">Замовити</Button>
+                </div>
+              </div>
+            </Card>
+            <p className="px-4 text-s">
+              *Акція діє за умови замовлення пакету «Застуда чи COVID-19?» на
+              сайті VitaLab до 15 листопада 2022 р. Акційна ціна не враховує
+              вартість забору біоматеріалу.
+            </p>
+            <p className="px-4 text-m">
+              Додаткова інформація за телефонами:
+              <a
+                className="ml-1 font-medium transition-opacity ease-hover hover:opacity-60"
+                href="tel:+380673105227"
+              >
+                (067) 310-52-27,
+              </a>
+              <a
+                className="ml-1 font-medium transition-opacity ease-hover hover:opacity-60"
+                href="tel:+3800503607575"
+              >
+                (050) 360-75-75
+              </a>
+              ,
+              <a
+                className="ml-1 font-medium transition-opacity ease-hover hover:opacity-60"
+                href="tel:+380632510338"
+              >
+                (063) 251-03-38
+              </a>
+            </p>
+          </section>
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+PostPage.getLayout = (page: ReactElement) => {
+  return <Layout>{page}</Layout>;
+};
+
+export default PostPage;

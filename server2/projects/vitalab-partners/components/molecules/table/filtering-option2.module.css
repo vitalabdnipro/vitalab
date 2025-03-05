@@ -1,0 +1,5 @@
+.input {
+  @apply px-3 py-1 pl-10 w-1/6 text-xs font-semibold outline-none rounded-l-md transition-all border focus:border-gray-400 focus:shadow-[0_0_0_2px_rgba(62,207,142,.1)];
+}
+
+/* font-medium text-sm bg-white border-0 h-7 flex items-center py-1 px-2 rounded-md duration-[240ms] transition-all ease-[cubic-bezier(.25,.1,.25,1)] text-[#3c4257] shadow-stripe hover:text-[#1a1f36] hover:shadow-stripeHover hover:fill-[#1a1f36] fill-[#4f566b] outline-none focus:ring focus:ring-[rgba(58,151,212,0.36)] focus:border-blue-500 */

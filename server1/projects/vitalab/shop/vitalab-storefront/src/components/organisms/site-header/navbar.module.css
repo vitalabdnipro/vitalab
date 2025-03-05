@@ -1,0 +1,127 @@
+.root {
+  position: relative;
+  z-index: theme("zIndex.50");
+  background-color: theme("backgroundColor.alice-blue");
+}
+
+.root:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: none;
+  background: linear-gradient(
+    90deg,
+    var(--guide-dashed-color),
+    var(--guide-dashed-color) 50%,
+    transparent 0,
+    transparent
+  );
+  background-size: 8px 1px;
+  content: "";
+}
+
+.guides__container {
+  display: grid;
+  grid: 1fr / repeat(var(--column-count-max), 1fr);
+  position: relative;
+  max-width: var(--layout-width);
+  height: 100%;
+  margin: 0 auto;
+}
+
+.guides__guide {
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    var(--guide-dashed-color),
+    var(--guide-dashed-color) 50%,
+    transparent 0,
+    transparent
+  );
+  background-size: 1px 8px;
+
+  &:first-of-type,
+  &:last-of-type {
+    background: var(--guide-solid-color);
+  }
+
+  &:last-of-type {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+}
+
+.header__container {
+  position: relative;
+  max-width: calc(var(--column-padding-normal) * 2 + var(--layout-width));
+  margin: 0 auto;
+  padding: 0 var(--column-padding-normal);
+}
+
+.logo {
+  transition: var(--hover-transition);
+  transition-property: color, opacity;
+
+  &:hover {
+    color: #0a2540; /* var(--navHoverColor); */
+    opacity: 0.6; /* var(--navHoverOpacity) */
+  }
+
+  & > a {
+    display: block;
+    outline: none;
+    padding: 4px;
+    margin: -4px;
+  }
+}
+
+.link {
+  --link-color: var(--nav-color);
+  --link-hover-color: var(--nav-hover-color);
+  --link-hover-opacity: var(--nav-hover-opacity);
+  display: block;
+  padding: 10px 20px;
+  font: 600 15px/1.6 var(--font-family);
+  letter-spacing: 0.2px;
+  color: var(--link-color);
+  /* cursor: pointer; */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: default;
+
+  transition: var(--hover-transition);
+  transition-property: color, opacity;
+
+  &:hover {
+    color: var(--link-hover-color, var(--link-color));
+    opacity: var(--link-hover-opacity, 1);
+  }
+}
+
+/* .SiteHeaderNavItem__link,
+.SiteHeaderNavItem__link.Link {
+  --linkColor: var(--navColor);
+  --linkHoverColor: var(--navHoverColor);
+  --linkHoverOpacity: var(--navHoverOpacity);
+  display: block;
+  padding: 10px 20px;
+  font: var(--fontWeightBold) 15px/1.6 var(--fontFamily);
+  letter-spacing: 0.2px;
+  color: var(--navColor);
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+} */

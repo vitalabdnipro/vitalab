@@ -1,0 +1,34 @@
+.card {
+  --cardBleedRightNormal: var(--columnWidth);
+  --cardBleedBottomNormal: 16px;
+  --cardShadow: none;
+  --cardShadowMargin: 0;
+  --card-min-height: 72px;
+  position: relative;
+  min-width: 100px;
+  min-height: var(--card-min-height);
+  max-width: var(--cardMaxWidth, none);
+  margin-right: calc(var(--cardBleedRight, 0) * -1);
+  margin-bottom: calc(var(--cardBleedBottom, 0) * -1);
+  border-radius: var(--cardBorderRadius);
+  background: var(--cardBackground);
+  box-shadow: var(--cardShadow);
+  overflow: hidden;
+}
+
+.article {
+  --newsroomStoryCardBackgroundScale: 1.03;
+  --newsroomStoryCardBackgroundOverlayScaleY: 1.35;
+  --newsroomStoryCardCopyY: 0;
+  --newsroomStoryCardCtaOpacity: 0;
+  --newsroomStoryCardCtaY: 40px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: theme("borderRadius.lg");
+  cursor: pointer;
+  /* -webkit-mask-image: -webkit-radial-gradient(#fff, #000); */
+  mask-image: radial-gradient(#fff, #000);
+}

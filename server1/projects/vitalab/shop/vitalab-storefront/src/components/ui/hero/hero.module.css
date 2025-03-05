@@ -1,0 +1,96 @@
+.root {
+  --section-margin-bottom: 0;
+  --section-padding-top: 0;
+  --section-padding-bottom-min: 64; /* 72 */
+  --section-padding-bottom-max: 64; /* 128 */
+  --section-padding-bottom: calc(var(--section-padding-bottom-min) * 1px);
+
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--section-margin-bottom);
+  color: #425466;
+  scroll-margin-top: calc(
+    var(--fixed-nav-height) + var(--fixed-nav-spacing) -
+      var(--section-padding-top)
+  );
+}
+
+@media (min-width: 640px) {
+  .root {
+    --section-padding-bottom: calc(
+      var(--section-padding-bottom-min) * 1px +
+        (var(--section-padding-bottom-max) - var(--section-padding-bottom-min)) *
+        (var(--window-width) / 737 - 0.50882px)
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    --section-padding-bottom: calc(var(--section-padding-bottom-max) * 1px);
+  }
+}
+
+.layoutContainer {
+  width: 100%;
+  max-width: var(--layout-width);
+  margin: 0 var(--column-padding-normal);
+}
+
+.layout {
+  padding: var(--section-padding-top) 0 var(--section-padding-bottom);
+}
+
+.rowLayout {
+  --row-layout-gap-xsmall: 16px;
+  --row-layout-gap-small: 24px;
+  --row-layout-gap-normal: 32px;
+  --row-layout-gap-medium: var(--row-layout-gap-normal);
+  --row-layout-gap-large: var(--row-layout-gap-normal);
+  --row-layout-gap-xlarge: var(--rowLayoutGapNormal);
+  --row-layout-gap: var(--row-layout-gap-large);
+  display: grid;
+  position: relative;
+  grid: auto/minmax(0, 1fr);
+  row-gap: var(--row-layout-gap);
+  align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+  .rowLayout {
+    --row-layout-gap-medium: 48px;
+    --row-layout-gap-large: var(--row-layout-gap-medium);
+    --row-layout-gap-xlarge: var(--row-layout-gap-medium);
+  }
+}
+
+@media (min-width: 768px) {
+  .rowLayout {
+    --row-layout-gap-large: 64px;
+    --row-layout-gap-xlarge: 96px;
+  }
+}
+
+.card {
+  --cardBleedRightNormal: var(--columnWidth);
+  --cardBleedBottomNormal: 16px;
+  --cardShadow: none;
+  --cardShadowMargin: 0;
+  --card-min-height: 72px;
+  --card-shadow: var(--card-shadow-small);
+  --card-shadow-margin: var(--card-shadow-small-margin);
+
+  display: grid;
+  gap: 16px 0;
+  padding: 16px;
+  position: relative;
+  min-width: 100px;
+  min-height: var(--card-min-height);
+  /* max-width: var(--cardMaxWidth, none);
+  margin-right: calc(var(--cardBleedRight, 0) * -1);
+  margin-bottom: calc(var(--cardBleedBottom, 0) * -1); */
+  border-radius: var(--card-border-radius);
+  background: #fff;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}

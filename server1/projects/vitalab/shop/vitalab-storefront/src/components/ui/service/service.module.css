@@ -1,0 +1,78 @@
+.root {
+  --row-gap: var(--row-gap-normal);
+  --padding-left: var(--column-padding-normal);
+  --padding-right: var(--column-padding-medium);
+  --header-padding-left: var(--padding-left);
+  --header-padding-right: var(--padding-right);
+  --headerMaxWidth: var(--copy-max-width);
+  --title-font-size: 15px;
+  --title-line-height: 1.6;
+  --title-font: 600 var(--title-font-size) / var(--title-line-height)
+    var(--font-family);
+  --title-color: #0a2540;
+  --title-border-color: var(--accent-color);
+  --body-padding-left: var(--padding-left);
+  --body-padding-right: var(--padding-right);
+  --body-font: 400 15px / 1.555555556 var(--font-family);
+  --body-max-width: var(--copy-max-width);
+  --footer-row-gap: var(--row-gap-medium);
+  --footer-gap: "";
+  --footer-padding-left: var(--padding-left);
+  --footer-padding-right: var(--padding-left);
+  /* --title-letter-spacing: 0.2px; */
+  display: grid;
+  row-gap: var(--row-gap);
+  scroll-margin-top: calc(60px + 48px);
+}
+
+.header {
+  display: grid;
+  row-gap: var(--row-gap);
+  position: relative;
+  padding: 0 var(--header-padding-right) 0 var(--header-padding-left);
+  max-width: var(--header-max-width);
+}
+
+.icon {
+  min-height: 40px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: var(--row-gap);
+}
+
+.title {
+  position: relative;
+  font: var(--title-font);
+  color: var(--title-color);
+  /* letter-spacing: var(--title-letter-spacing, inherit); */
+
+  &:before {
+    display: block;
+    position: absolute;
+    top: calc(
+      0.5px + var(--title-line-height) * var(--title-font-size) / 2 -
+        var(--title-font-size) / 2
+    );
+    left: calc(var(--header-padding-left) * -1);
+    width: 1px;
+    height: var(--title-font-size);
+    background-color: var(--title-border-color, transparent);
+    content: "";
+  }
+}
+
+.body {
+  --text-color: var(--text-primary);
+  padding: 0 var(--body-padding-right) 0 var(--body-padding-left);
+  font: var(--body-font);
+  color: var(--text-color);
+  max-width: var(--body-max-width);
+}
+
+.footer {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  row-gap: var(--footer-row-gap);
+  margin-top: calc(var(--footer-gap, var(--row-gap)) - var(--row-gap));
+  padding: 0 var(--footer-padding-right) 0 var(--footer-padding-left);
+}

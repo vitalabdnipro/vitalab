@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .geist-container {
+    position: relative;
+    display: flex;
+    min-width: 1px;
+    max-width: theme("width.full");
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #cf-turnstile iframe {
+    width: 385px !important;
+  }
+}

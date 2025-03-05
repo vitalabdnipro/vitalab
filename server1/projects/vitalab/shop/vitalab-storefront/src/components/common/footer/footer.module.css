@@ -1,0 +1,27 @@
+.root {
+  display: grid;
+  grid: auto/repeat(2, 1fr);
+  row-gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .root {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.column {
+  display: grid;
+  row-gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .column {
+    grid: min-content/auto;
+    grid-auto-rows: min-content;
+
+    &:first-child {
+      grid-template-rows: auto min-content;
+    }
+  }
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+DATABASE_URL="postgresql://postgres:T558fuA8Xyt7gGHGf@db.rtemaqdurfxkjhfuvwzf.supabase.co:5432/postgres" node server.js

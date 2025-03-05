@@ -1,0 +1,8 @@
+#!/bin/sh
+# ENVIRONEMTN from docker-compose.yaml doesn't get through to subprocesses
+# Need to explicit pass DATABASE_URL here, otherwise migration doesn't work
+# Run migrations
+DATABASE_URL="postgresql://postgres:T558fuA8Xyt7gGHGf@db.rtemaqdurfxkjhfuvwzf.supabase.co:5432/postgres" npx prisma migrate deploy
+# openvpn vitalab.ovpn
+# start app
+DATABASE_URL="postgresql://postgres:T558fuA8Xyt7gGHGf@db.rtemaqdurfxkjhfuvwzf.supabase.co:5432/postgres" node server.js

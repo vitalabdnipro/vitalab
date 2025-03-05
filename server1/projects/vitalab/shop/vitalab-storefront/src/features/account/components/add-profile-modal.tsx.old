@@ -1,0 +1,16 @@
+import * as Modal from "@components/atoms/dialog"
+import { Text } from "@components/atoms/text/text"
+
+export const AddProfileModal = ({ active, onClickOutside }) => {
+  return (
+    <Modal.Root open={active} onOpenChange={onClickOutside}>
+      <Modal.Body>
+        <Modal.Header>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <p className="text-base font-normal text-slate-900">Modal content</p>
+        <Modal.Actions>test</Modal.Actions>
+      </Modal.Body>
+    </Modal.Root>
+  )
+}

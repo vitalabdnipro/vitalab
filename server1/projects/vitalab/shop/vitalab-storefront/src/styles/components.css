@@ -1,0 +1,44 @@
+.link {
+  /* --link-color: #635bff; */
+  --link-hover-color: #0a2540;
+  font-weight: var(--link-weight, theme("fontWeight.semibold"));
+  cursor: pointer;
+  color: var(--link-color, theme("textColor.orange.600"));
+  opacity: 1;
+  transition: theme("transitionDelay.150")
+    theme("transitionTimingFunction.hover");
+  transition-property: color, opacity;
+  outline: none;
+
+  &:hover {
+    color: var(--link-hover-color, var(--link-color));
+    opacity: var(--link-hover-opacity, 1);
+  }
+}
+
+.title {
+  --title-padding-left: var(--column-padding-normal);
+  --title-padding-right: var(--column-padding-medium);
+  position: relative;
+  padding: 0 var(--title-padding-right) 0 var(--title-padding-left);
+  font-family: var(--font-family);
+  font-weight: var(--title-weight);
+  font-size: var(--title-font-size);
+  line-height: var(--title-line-height);
+  color: var(--title-color);
+  letter-spacing: var(--title-letter-spacing, 0.2px);
+}
+
+/* .CopyTitle:before {
+  display: var(--titleAnchorDisplay, block);
+  position: absolute;
+  top: calc(
+    0.5px + var(--titleLineHeight) * var(--titleFontSize) / 2 -
+      var(--titleFontSize) / 2
+  );
+  left: calc(var(--titlePaddingLeft) - var(--columnPaddingNormal));
+  width: 1px;
+  height: var(--titleFontSize);
+  background-color: var(--titleBorderColor, transparent);
+  content: "";
+} */

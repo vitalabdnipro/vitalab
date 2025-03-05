@@ -1,0 +1,142 @@
+import React from "react"
+import Link from "next/link"
+import cn from "clsx"
+import { SectionBackgroundMask, Service, Slider } from "@components/ui"
+
+import s from "./hero.module.css"
+import covid19 from "../../../../public/icons/covid19.svg"
+import PhoneDropdown from "../phone-dropdown"
+
+const services = [
+  {
+    icon: covid19,
+    title: "Замовити аналізи",
+    body: "Дізнайтеся, чи є коронавірусна інфекція чи імунітет до неї.",
+    href: "#",
+  },
+  {
+    icon: covid19,
+    title: "Дивитись результати",
+    body: "Дізнайтеся, чи є коронавірусна інфекція чи імунітет до неї.",
+    href: "#",
+  },
+  {
+    icon: covid19,
+    title: "Виклик до дому",
+    body: "Дізнайтеся, чи є коронавірусна інфекція чи імунітет до неї.",
+    href: "#",
+  },
+]
+
+const Card = () => {
+  return (
+    <div className={s.card}>
+      {/* .NewsroomContactCard__section */}
+      <section className="grid gap-y-0.5">
+        <h2 className="text-m font-semibold leading-6 tracking-[.2px] text-title">
+          Де здати аналіз?
+        </h2>
+        <Link href="/">
+          <a className="link">test</a>
+        </Link>
+      </section>
+    </div>
+  )
+}
+
+const Hero = () => {
+  // ProductHeroSection
+  return (
+    <section className={s.root}>
+      {/* Section__masked */}
+      <div className="overflow-hidden">
+        {/* Section__backgroundMask */}
+        <SectionBackgroundMask />
+        {/* Section__container */}
+        <div className="relative z-10 flex justify-center">
+          {/* Section__layoutContainer */}
+          <div className={s.layoutContainer}>
+            {/* Section__layout */}
+            <div className={s.layout}>
+              {/* RowLayout */}
+              <div className={s.rowLayout}>
+                {/* ProductNav */}
+                <nav className="flex items-center justify-between py-4 pl-4 text-blue-600">
+                  {/* ProductNav__header */}
+                  <div className="mr-4 flex items-center">
+                    {/* ProductNav__title */}
+                    <h1 className="inline-flex items-center text-s font-semibold leading-6">
+                      Діагностичний лабораторний центр
+                    </h1>
+                  </div>
+                  {/* HorizontalOverflowContainer
+                        --trackHeight: auto;
+                        --maskSpacing: 16px;
+                        -webkit-mask-image: linear-gradient(90deg,transparent,#000 var(--maskSpacing),#000 calc(100% - var(--maskSpacing)),transparent);
+                        mask-image: linear-gradient(90deg,transparent,#000 var(--maskSpacing),#000 calc(100% - var(--maskSpacing)),transparent);
+                  */}
+                  <div className="flex items-center overflow-hidden">
+                    {/* HorizontalOverflowContainer__track */}
+                    <div className="relative flex h-auto overflow-auto">
+                      {/* HorizontalOverflowContainer__items */}
+                      <div className="relative flex px-4">
+                        {/* ProductNav__linkList */}
+                        <ul className="p0 m-0 flex">
+                          {/* ProductNavItem */}
+                          <li className="inline-block list-none whitespace-nowrap pr-2 text-s font-semibold leading-6 sm:pr-4">
+                            {/* <Link href="/">
+                              <a className="cursor-pointer opacity-100 text-link transition ease-hover outline-none hover:text-link-hover ">
+                                067 310 52 27
+                              </a>
+                            </Link> */}
+                            <PhoneDropdown />
+                          </li>
+                          {/* <li className="inline-block list-none whitespace-nowrap px-2 text-s font-semibold leading-6 sm:px-4">
+                            <Link href="/">
+                              <a className="link">067 310 52 27</a>
+                            </Link>
+                          </li> */}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </nav>
+                {/* ProductHeroSection__content */}
+                <div
+                  className={cn(s.rowLayout)}
+                  style={
+                    {
+                      "--row-layout-gap": `var(--row-layout-gap-xlarge)`,
+                    } as React.CSSProperties
+                  }
+                >
+                  {/* Newsroom Featured Articles Carousel */}
+                  <Slider />
+                  {/* Services */}
+                  <div>
+                    {/* ColumnLayout */}
+                    <div className="grid items-start gap-y-8 sm:grid-cols-2 md:grid-cols-4">
+                      {/* Copy variant--Detail */}
+                      {services.map((service) => (
+                        <Service
+                          key={service.title}
+                          icon={service.icon}
+                          title={service.title}
+                          body={service.body}
+                          href={service.href}
+                        />
+                      ))}
+                      <Card />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Hero

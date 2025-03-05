@@ -1,0 +1,32 @@
+.guides__container {
+  display: grid;
+  grid: 1fr / repeat(var(--column-count-max), 1fr);
+  position: relative;
+  max-width: var(--layout-width);
+  height: 100%;
+  margin: 0 auto;
+}
+
+.guides__guide {
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    var(--guide-dashed-color),
+    var(--guide-dashed-color) 50%,
+    transparent 0,
+    transparent
+  );
+  background-size: 1px 8px;
+
+  &:first-of-type,
+  &:last-of-type {
+    background: var(--guide-solid-color);
+  }
+
+  &:last-of-type {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+}

@@ -1,0 +1,35 @@
+.root {
+  position: relative;
+}
+
+.sectionHeading {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: theme("textColor.slate.900");
+
+  /* &:before {
+    display: var(--titleAnchorDisplay, block);
+    position: absolute;
+    top: calc(
+      0.5px + var(--titleLineHeight) * var(--titleFontSize) / 2 -
+        var(--titleFontSize) / 2
+    );
+    left: calc(var(--headerPaddingLeft) * -1);
+    width: 1px;
+    height: var(--titleFontSize);
+    background-color: var(--titleBorderColor, transparent);
+    content: "";
+  } */
+
+  &:before {
+    display: block;
+    position: absolute;
+    top: calc(0.5px + 1.6 * 15px / 2 - 15px / 2);
+    left: calc(16px * -1);
+    width: 1px;
+    height: 15px;
+    background-color: theme("textColor.orange.500");
+    content: "";
+  }
+}

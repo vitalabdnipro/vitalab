@@ -1,0 +1,20 @@
+export {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  //
+  Root,
+  Trigger,
+  Portal,
+  Overlay,
+  Body,
+  Header,
+  Actions,
+  Title,
+  Description,
+  Close,
+} from "./dialog"

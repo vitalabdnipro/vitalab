@@ -1,0 +1,54 @@
+import { ReactElement } from "react"
+import { useRouter } from "next/router"
+import { Layout } from "@components/common"
+import AnalyzesLayout from "@components/common/layouts/analyzes-layout"
+import { useQuery } from "@tanstack/react-query"
+
+let MEDUSA_BACKEND_URL = "http://localhost:9000"
+
+if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+  MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
+}
+
+const fetchCats = async () => {
+  const response = await fetch(`${MEDUSA_BACKEND_URL}/store/categories`)
+  const data = await response.json()
+  return data
+}
+
+export default function SlugPage(props) {
+  const { data } = useQuery({
+    queryKey: ["todos"],
+    queryFn: fetchCats,
+  })
+
+  if (!data) {
+    return <div>loading</div>
+  }
+  console.log("info", data)
+  const router = useRouter()
+  const { id } = router.query
+  console.log("props.categoriesData", props.categoriesData)
+  return (
+    <div>
+      <h1>Slug Page {id}</h1>
+    </div>
+  )
+}
+
+// export function getServerSideProps() {
+// //   const categoriesResponse = await fetch(
+// //     `${MEDUSA_BACKEND_URL}/store/categories`
+// //   )
+
+// //   const response = await categoriesResponse.json()
+// //   console.log("categoriesResponse", response)
+// //   const categoriesData = await response.filter((obj) => obj.id !== 14)
+
+//   // Pass data to the page via props
+//   return { props: { id: "x" } }
+// }
+
+SlugPage.getLayout = (page: ReactElement) => {
+  return <AnalyzesLayout>{page}</AnalyzesLayout>
+}

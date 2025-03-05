@@ -1,0 +1,48 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: backend:starter
+    container_name: medusa-server-default
+    depends_on:
+      # - postgres
+      - redis
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    cap_add:
+      - SYS_MODULE
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    environment:
+      # DATABASE_URL: postgres://postgres:postgres@postgres:5432/medusa-docker
+      DATABASE_URL: postgresql://postgres:R0hE9O9K2oP3BISB@db.fjkqqrmctfyqwgjdxiix.supabase.co:5432/postgres
+      REDIS_URL: redis://redis
+      NODE_ENV: development
+      JWT_SECRET: something
+      COOKIE_SECRET: something
+      PORT: 9000
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/app/medusa
+      - node_modules:/app/medusa/node_modules
+
+  postgres:
+    image: postgres:10.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: medusa-docker
+
+  redis:
+    image: redis
+    expose:
+      - 6379
+
+volumes:
+  node_modules:
