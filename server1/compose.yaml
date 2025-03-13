@@ -71,13 +71,13 @@ services:
   #     - front-tier
   #     - back-tier
 
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
-    networks:
-      - front-tier
-      - back-tier
+#  adminer:
+#    image: adminer
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - front-tier
+#      - back-tier
 
   # vitalab.com.ua
   vitalab-core:

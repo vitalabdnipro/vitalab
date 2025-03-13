@@ -2,11 +2,11 @@ const { DataSource } = require("typeorm");
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  port: 5434,
-  host: "185.25.117.23",
-  username: "vitalab",
-  password: "Pb7aHebT23v5P5akC777",
-  database: "vitalabtest",
+  port: process.env.DATABASE_PORT,
+  host: process.env.DATABASE_HOST,
+  username: process.env.DATABASE_DB_USERNAME,
+  password: process.env.DATABASE_DB_PASSWORD,
+  database: process.env.DATABASE_DB_TEST,
   entities: ["dist/models/*.js"],
   migrations: ["dist/migrations/*.js"],
 });
