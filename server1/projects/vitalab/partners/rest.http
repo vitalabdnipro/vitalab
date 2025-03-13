@@ -1,3 +1,0 @@
-GET http://localhost:3001/api/results/sms?apiKey=375926176d325fd83d31b949ec8386f9ff5f3a70947a1deb043d7640b3dcce7b
-# GET http://localhost:3001/api/results?apiKey=375926176d325fd83d31b949ec8386f9ff5f3a70947a1deb043d7640b3dcce7b
-# GET https://partners.vitalab.com.ua/api/results?apiKey=375926176d325fd83d31b949ec8386f9ff5f3a70947a1deb043d7640b3dcce7b
