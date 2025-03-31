@@ -33,6 +33,14 @@ const data = [
     type: "Акція",
   },
   {
+    label: "РУХАЙТЕСЬ ВІЛЬНО!",
+    description: "Перевірте 4 маркери ревматизму зі знижкою!",
+    link: "/news/moove-freely",
+    img: "/b/revmatizm_disc_20.jpg",
+    linkText: "Детальніше",
+    type: "Акція",
+  },
+  {
     label: "ЗАСТУДИЛИСЬ? ОДУЖУЙТЕ!",
     description: (
       <div>
@@ -104,18 +112,18 @@ const data = [
     linkText: "Детальніше",
     type: "Акція",
   },
-  {
-    label: "ІМУНІТЕТ У ПОРЯДКУ!",
-    description: (
-      <div>
-        <p>Скринінг стану імунітету зі знижкою!</p>
-      </div>
-    ),
-    img: "/b/b_30082024_2.jpg",
-    link: "/news/immunity-ok",
-    linkText: "Детальніше",
-    type: "Акція",
-  },
+  // {
+  //   label: "ІМУНІТЕТ У ПОРЯДКУ!",
+  //   description: (
+  //     <div>
+  //       <p>Скринінг стану імунітету зі знижкою!</p>
+  //     </div>
+  //   ),
+  //   img: "/b/b_30082024_2.jpg",
+  //   link: "/news/immunity-ok",
+  //   linkText: "Детальніше",
+  //   type: "Акція",
+  // },
   {
     label: "Ми завжди поруч",
     description: "Виклик медсестри додому чи в офіс",

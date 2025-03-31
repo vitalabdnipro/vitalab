@@ -130,6 +130,11 @@ const labs = [
     address: "м. Дніпро, пр. Слобожанський, 60",
     value: "19",
   },
+  {
+    label: "Діагностичний лабораторний центр 'VitaLab'",
+    address: "м. Дніпро, пров. Фестивальний, 14",
+    value: "20",
+  },
 ]
 
 const LaboratorySelect = (props) => {

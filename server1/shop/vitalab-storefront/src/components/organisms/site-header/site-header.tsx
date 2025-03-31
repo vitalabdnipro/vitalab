@@ -2,7 +2,7 @@ import Link from "next/link"
 import { CartDropdown } from "@components/cart"
 import { MainNav } from "@components/molecules/main-nav"
 import { MobileNav } from "@components/molecules/mobile-nav"
-import { Logo, NavigationMenu } from "@components/ui"
+import { Logo } from "@components/ui"
 
 import s from "./navbar.module.css"
 import { cn } from "@utils/cn"

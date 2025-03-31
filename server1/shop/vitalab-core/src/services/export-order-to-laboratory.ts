@@ -123,6 +123,12 @@ const laboratories = [
     id: "19",
     name: "Калина",
   },
+  {
+    // м. Дніпро, пров. Фестивальний, 14
+    code: "28b3cbad1b094f02aaf992e0039fcda5",
+    id: "20",
+    name: "Фестивальний",
+  },
 ];
 
 class ExportOrderToLaboratoryService extends TransactionBaseService {

@@ -26,7 +26,7 @@ const PostPage = () => {
           </header>
           <aside className="hidden md:block md:grid-in-meta">
             <time className="relative px-4 text-m text-gray-700 before:absolute before:left-0 before:top-0.5 before:h-[15px] before:w-px before:bg-orange-500">
-              01.03.2025
+              01.04.2025
             </time>
           </aside>
           <section className="grid gap-y-10 grid-in-body">
@@ -71,7 +71,7 @@ const PostPage = () => {
             </Card>
             <p className="px-4 text-s">
               *Акція діє за умови замовлення пакету досліджень на сайті з
-              01.03.2025 р. по 31.03.2025 р. Акційна ціна не враховує вартість
+              01.04.2025 р. по 30.04.2025 р. Акційна ціна не враховує вартість
               забору біоматеріалу. Знижки за різними акційними пропозиціями не
               підсумовуються.
             </p>
