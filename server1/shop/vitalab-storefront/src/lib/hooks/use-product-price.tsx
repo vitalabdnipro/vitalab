@@ -39,16 +39,6 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
     })
 
     return {
-      // calculated_price: formatAmount({
-      //   amount: cheapestVariant.calculated_price,
-      //   region: cart.region,
-      //   includeTaxes: false,
-      // }),
-      // original_price: formatAmount({
-      //   amount: cheapestVariant.original_price,
-      //   region: cart.region,
-      //   includeTaxes: false,
-      // }),
       calculated_price: cheapestVariant.calculated_price,
       original_price: cheapestVariant.original_price,
       price_type: cheapestVariant.calculated_price_type,
@@ -73,16 +63,6 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
     }
 
     return {
-      // calculated_price: formatAmount({
-      //   amount: variant.calculated_price,
-      //   region: cart.region,
-      //   includeTaxes: false,
-      // }),
-      // original_price: formatAmount({
-      //   amount: variant.original_price,
-      //   region: cart.region,
-      //   includeTaxes: false,
-      // }),
       calculated_price: variant.calculated_price,
       original_price: variant.original_price,
       price_type: variant.calculated_price_type,

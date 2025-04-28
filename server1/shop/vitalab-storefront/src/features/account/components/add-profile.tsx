@@ -115,27 +115,9 @@ export const AddProfile = ({ customer }) => {
           },
         },
       })
-      // .then(() => {
-      //   setSubmitting(false)
-      //   refetchCustomer()
-      //   handleClose()
-      // })
-      // .catch(() => {
-      //   setSubmitting(false)
-      //   // setError("Failed to add address, please try again.")
-      // })
       const promise2 = medusaClient.customers.addresses.addAddress({
         address: payload,
       })
-      // .then(() => {
-      //   setSubmitting(false)
-      //   refetchCustomer()
-      //   handleClose()
-      // })
-      // .catch(() => {
-      //   setSubmitting(false)
-      //   // setError("Failed to add address, please try again.")
-      // })
 
       try {
         const results = await Promise.all([promise1, promise2])
@@ -166,56 +148,6 @@ export const AddProfile = ({ customer }) => {
   console.log("customer:", errors)
   return (
     <>
-      {/* <div className="flex flex-1 items-stretch">
-        <button
-          className="flex min-h-[180px] w-full max-w-full flex-col justify-end rounded-[5px] bg-white py-3 shadow-[0_0_0_1px_rgba(0,0,0,0.04),_0_4px_12px_rgba(0,0,0,0.08),0_2px_4px_rgba(0,0,0,0.06)] transition-shadow duration-200 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_16px_24px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.08)]"
-          onClick={open}
-        >
-          <svg aria-hidden="true" height="24" width="24">
-            <defs>
-              <linearGradient
-                gradientTransform="rotate(37.28)"
-                id="moniotoring-icon-fill_24"
-              >
-                <stop offset="23%" stop-color="rgb(71, 71, 71)"></stop>
-                <stop offset="110%" stop-color="rgb(217, 217, 217)"></stop>
-              </linearGradient>
-            </defs>
-            <mask id="monitoring-icon_24">
-              <svg
-                data-testid="geist-icon"
-                fill="none"
-                height="24"
-                shape-rendering="geometricPrecision"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                width="24"
-                className="text-white"
-              >
-                <path d="M18 20V10"></path>
-                <path d="M12 20V4"></path>
-                <path d="M6 20v-6"></path>
-              </svg>
-            </mask>
-            <rect
-              fill="url(#moniotoring-icon-fill_24)"
-              height="24"
-              mask="url(#monitoring-icon_24)"
-              width="24"
-              x="0"
-              y="0"
-            ></rect>
-          </svg>
-          <div className="mx-4 mb-3 mt-2 flex h-20 flex-initial flex-col items-stretch justify-start gap-1">
-            <Text as="p" size="md" weight="semibold">
-              Створити профіль
-            </Text>
-          </div>
-        </button>
-      </div> */}
       <Button type="secondary" onClick={open}>
         Додати профіль <Plus size={20} className="ml-2" />
       </Button>
@@ -261,27 +193,6 @@ export const AddProfile = ({ customer }) => {
                         }
                         selected={parse(field.value, "dd.MM.yyyy", new Date())}
                       />
-                      // <DatePicker
-                      //   {...field}
-                      //   disableCalendar
-                      //   value={field.value}
-                      //   dayPlaceholder="ДД"
-                      //   monthPlaceholder="ММ"
-                      //   yearPlaceholder="РРРР"
-                      //   // showLeadingZeros={true}
-                      //   className=""
-                      //   format="dd.MM.yyyy"
-                      //   // onInvalidChange={() => {
-                      //   //   setError("birthday", {
-                      //   //     type: "manual",
-                      //   //     message: "Заповніть дату народження",
-                      //   //   })
-                      //   // }}
-                      //   // onChange={(data) => {
-                      //   //   clearErrors("birthday")
-                      //   //   field.onChange(data)
-                      //   // }}
-                      // />
                     )}
                   />
                   <p className="text-xs text-red-500">

@@ -20,6 +20,7 @@ import { Eye, EyeOff } from "lucide-react"
 
 import femaleSexGender from "/public/i/female-sex-gender.png"
 import visa from "/public/logo/visa-logo.png"
+import defaultData from "../../../../data/pages_laboratories.json"
 
 // import kid from "/public/img/kid.png"
 
@@ -34,229 +35,6 @@ type Laboratory = {
   kid?: string
   femaleSex?: boolean
 }
-
-const defaultData: Laboratory[] = [
-  {
-    name: `Діагностичний лабораторний центр "VitaLab"`,
-    address: "м. Дніпро, вул. Херсонська, 10а (медичний центр), 3 поверх",
-    workingHours: [
-      "Пн-Пт. з 8:00 до 18:00",
-      "Сб. з 8:00 до 16:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["з 8.00 до 12.00"],
-    coordinates: { lat: 48.462689, lng: 35.03132 },
-    terminal: true,
-    kid: "0",
-    femaleSex: true,
-  },
-  {
-    name: `Амбулаторія КНП "ДЦПМСД №4"`,
-    address: "м. Дніпро, вул. Ламана, 4, 1 поверх, каб. № 108",
-    workingHours: [
-      "Пн-Пт. з 8:00 до 14:00",
-      "Сб. з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["з 8.00 до 12.00"],
-    coordinates: { lat: 48.467227, lng: 35.055209 },
-    terminal: true,
-  },
-  {
-    name: `Аптека "Таблєткін"`,
-    address: "м. Дніпро, пр. Богдана Хмельницького, 16",
-    workingHours: ["Пн-Пт. з 8:00 до 14:00", "Сб, Нд. вихідний"],
-    biomaterial: ["з 8.00 до 12.00"],
-    coordinates: { lat: 48.442047, lng: 35.023113 },
-    terminal: true,
-  },
-  {
-    name: `Амбулаторія КНП "ДЦПМСД №4"`,
-    address: "м. Дніпро, пр. Героїв, 22, 4 поверх",
-    workingHours: ["Пн-Пт. з 8:00 до 14:00", "Сб, Нд. вихідний"],
-    biomaterial: ["з 8.00 до 12.00"],
-    coordinates: { lat: 48.414219, lng: 35.060745 },
-    terminal: true,
-  },
-  {
-    name: `Діагностичний лабораторний центр "VitaLab"`,
-    address: "м. Дніпро, бульвар Слави 8, 1 поверх, вхід зі сторони бульвару",
-    workingHours: [
-      "Пн-Пт. з 7:00 до 14:00",
-      "Сб. з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["з 7:00 до 11:00", "Cб. з 8:00 до 11:00"],
-    coordinates: { lat: 48.41376843918176, lng: 35.065391442519825 },
-    terminal: true,
-    femaleSex: true,
-  },
-  {
-    name: `Діагностичний лабораторний центр "VitaLab"`,
-    address: "м. Дніпро, вул. Академіка Образцова 1",
-    workingHours: [
-      "Пн-Пт. з 7:00 до 15:00",
-      "Сб. з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["з 7:00 до 12:00", "Сб. з 8:00 до 11:00"],
-    coordinates: { lat: 48.51623388250064, lng: 35.05445679549117 },
-    terminal: true,
-    kid: 3,
-  },
-  {
-    name: `Амбулаторія КНП "ДЦПМСД №9"`,
-    address: "м. Дніпро, вул. Батумська, 13, 1 поверх",
-    workingHours: [
-      "Пн-Пт. з 8:00 до 14:00",
-      "Сб. з 9:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: [
-      "з 8:00 до 12:00, на окремі дослідження до 13:45",
-      "Сб. з 9:00 до 11:00",
-    ],
-    coordinates: { lat: 48.515757, lng: 35.084927 },
-    terminal: true,
-  },
-  {
-    name: `КП "ДСКМЦМД ім. проф. М.Ф. РУДНЄВА" ДОР"`,
-    address:
-      "м. Дніпро, пр. Л. Українки, 26, педіатричний корп., 1 поверх, каб. №14",
-    workingHours: ["Пн-Пт. з 8:00 до 14:00", "Сб, Нд. вихідний"],
-    biomaterial: ["з 8:00 до 12:00"],
-    coordinates: { lat: 48.469006, lng: 35.014588 },
-    terminal: true,
-    kid: "3",
-  },
-  {
-    name: `Амбулаторія КНП «ДЦПМСД №2» ДОР»`,
-    address: "м. Дніпро, вул. Перемоги, 113, 1 поверх",
-    workingHours: ["Пн-Пт. з 8:00 до 14-00", "Сб, Нд. вихідний"],
-    biomaterial: ["з 8:00 до 12:00"],
-    coordinates: { lat: 48.413797742281, lng: 35.00741265942202 },
-  },
-  {
-    name: `КП «ДБКЛ з надання психіатричної допомоги» ДОР»`,
-    address:
-      "м. Дніпро, ж/м Ігрень, вул. Бехтерева 1, приймальне відділення, 1 поверх",
-    workingHours: [
-      "Пн-Пт. з 8:00 до 14:00",
-      "Сб. з 8:00 до 12:00 (друга і четверта субота місяця)",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["з 8:00 до 12:00"],
-    coordinates: { lat: 48.472726, lng: 35.185736 },
-    terminal: true,
-  },
-  {
-    name: `Амбулаторія КНП "ДЦПМСД №5"`,
-    address: "м. Дніпро, вул. Велика Діївська, 111, 1 поверх",
-    workingHours: [
-      "Пн-Пт. з 8:00 до 14:00",
-      "Сб. з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["з 8:00 до 12:00"],
-    coordinates: { lat: 48.478664102001936, lng: 34.925088840497224 },
-    terminal: true,
-  },
-  {
-    name: `КП "ДОКОД" ДОР"`,
-    address: "м. Дніпро, вул. Гавриленка, 1 (мамологічний корп., 1 поверх)",
-    workingHours: ["Пн-Пт. з 7:30 до 13:00", "Сб, Нд. вихідний"],
-    biomaterial: ["з 7:30 до 12:00"],
-    coordinates: { lat: 48.43702, lng: 35.01657 },
-    terminal: true,
-  },
-  {
-    name: `Аптека "Подорожник"`,
-    address: "м. Дніпро, пр. Дмитра Яворницького, 10",
-    // workingHours: ["Тимчасово зачинено у зв’язку з ремонтними роботами"],
-    workingHours: [
-      "Пн-Пт. з 8:00 до 14:00",
-      "Сб з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["з 8:00 до 12:00"],
-    // biomaterial: ["з 30.10.2024 р. по 03.11.2024 р."],
-    coordinates: { lat: 48.452875440559964, lng: 35.06953647678639 },
-    terminal: true,
-    kid: "3",
-  },
-  {
-    name: `Діагностичний лабораторний центр "VitaLab"`,
-    address: "м. Дніпро, пров. Вільний, 2А",
-    workingHours: [
-      "Пн-Пт. з 7:30 до 15:00",
-      "Сб з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["Пн-Пт. з 7:30 до 12:00", "Сб. з 8:00 до 12:00"],
-    coordinates: { lat: 48.53073900172394, lng: 35.0181757192049 },
-    terminal: true,
-    kid: "3",
-  },
-  {
-    name: `Діагностичний лабораторний центр "VitaLab"`,
-    address: "м. Дніпро, пр. Слобожанський, 60",
-    workingHours: [
-      "Пн-Пт. з 7:30 до 15:00",
-      "Сб з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["Пн-Пт. з 7:30 до 12:00", "Сб. з 8:00 до 12:00"],
-    coordinates: { lat: 48.51174995431485, lng: 35.077659164250505 },
-    terminal: true,
-    kid: "3",
-    femaleSex: true,
-  },
-  {
-    name: `Діагностичний лабораторний центр "VitaLab"`,
-    address: "м. Дніпро, пров. Фестивальний, 14",
-    workingHours: ["Пн-Пт. з 8:00 до 14:00", "Сб, Нд. вихідний"],
-    biomaterial: ["Пн-Пт. з 8:00 до 12:00"],
-    coordinates: { lat: 48.52993971580881, lng: 35.02272022698467 },
-    terminal: true,
-  },
-  {
-    name: `Діагностичний лабораторний центр "VitaLab"`,
-    address: "смт. Слобожанське, вул. Будівельників, 16А",
-    workingHours: [
-      "Пн-Пт. з 7:00 до 15:00",
-      "Сб. з 8:00 до 12:00",
-      "Нд. вихідний",
-    ],
-    biomaterial: ["Пн-Пт. з 7:00 до 12:00", "Сб. з 8:00 до 12:00"],
-    coordinates: { lat: 48.532244034791326, lng: 35.0778827843017 },
-    terminal: true,
-  },
-  {
-    name: `Діагностичний лабораторний центр "VitaLab" м. Нікополь`,
-    address: "м. Нікополь, вул. Пилипа Орлика, 46",
-    workingHours: ["Пн-Пт. з 8:00 до 14:00", "Сб., Нд. вихідний"],
-    biomaterial: ["з 8:00 до 11:00"],
-    coordinates: { lat: 47.57475237677851, lng: 34.374052983001484 },
-    terminal: true,
-  },
-  {
-    name: `КП НКП "Криничанська ЦЛ" КСР"`,
-    address: "смт. Кринички, вул. Героїв Чорнобиля, 22, 1 поверх, каб. №4",
-    workingHours: ["Пн-Пт. з 8:00 до 14:00", "Сб, Нд. вихідний"],
-    biomaterial: ["з 8:00 до 11:00"],
-    coordinates: { lat: 48.377096, lng: 34.466481 },
-    // terminal: true,
-    // kid: "3",
-  },
-  {
-    name: `НКП "Солонянська ЦРЛ" ДОР"`,
-    address: "смт. Солоне, вул. Усенко, 13, 2 поверх",
-    workingHours: ["Пн-Пт. з 8:00 до 14:00", "Сб, Нд. вихідний"],
-    biomaterial: ["з 9:00 до 11:00"],
-    coordinates: { lat: 48.203229494563864, lng: 34.88024725600128 },
-    terminal: true,
-  },
-]
 
 const columnHelper = createColumnHelper<Laboratory>()
 
@@ -373,14 +151,6 @@ const columns = [
       </ul>
     ),
   }),
-  // columnHelper.accessor("status", {
-  //   header: "Status",
-  //   footer: (info) => info.column.id,
-  // }),
-  // columnHelper.accessor("progress", {
-  //   header: "Profile Progress",
-  //   footer: (info) => info.column.id,
-  // }),
 ]
 
 const Trigger = (props: any) => {
@@ -563,27 +333,7 @@ const Table = () => {
               </tr>
             ))}
           </tbody>
-          {/* <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot> */}
         </table>
-        {/* <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
-        Rerender
-      </button> */}
       </div>
     </>
   )
@@ -600,11 +350,6 @@ const Laboratories = () => {
         <div className="pb-20">
           <div
             className="section__row-layout gap-16"
-            // style={
-            //   {
-            //     "--row-layout-gap": `var(--row-layout-gap-xlarge)`,
-            //   } as React.CSSProperties
-            // }
           >
             <Breadcrumbs title="Пункти" />
             <Card className="mt-9 bg-white md:mt-0" shadow="medium">

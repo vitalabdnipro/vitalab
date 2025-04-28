@@ -1,0 +1,105 @@
+[
+  {
+    "title": "РУХАЙТЕСЬ ВІЛЬНО!",
+    "description": "Перевірте 4 маркери ревматизму зі знижкою!",
+    "slug": "/news/moove-freely",
+    "date": "2025-04-01",
+    "img": "/b/revmatizm_disc_20.jpg",
+    "type": "promotions"
+  },
+  {
+    "title": "ЗУСТРІЧАЙТЕ ВЕСНУ ЗДОРОВИМИ!",
+    "description": "-40% на великий чек-ап",
+    "slug": "/news/check-up",
+    "date": "2025-03-01",
+    "img": "/b/b_01032025.jpg",
+    "type": "promotions"
+  },
+  {
+    "title": "КОЛИ СИЛИ НА НУЛІ",
+    "description": "Перевіртесь на дефіцити зі знижкою 20%!",
+    "slug": "/news/fatigue",
+    "date": "2025-03-01",
+    "img": "/b/b_01032025_1.jpg",
+    "type": "promotions"
+  },
+  {
+    "title": "ЗАСТУДИЛИСЬ? ОДУЖУЙТЕ!",
+    "description": "Перевірте свій стан при ГРВІ зі знижкою 25%!",
+    "slug": "/news/get-well",
+    "date": "2025-04-01",
+    "img": "/b/b_30112024.jpg",
+    "type": "promotions"
+  },
+  {
+    "title": "ЧИ ДОСТАТНЬО ВІТАМІНУ D?",
+    "description": "Перевірте організм на дефіцит вітаміну D зі знижкою!",
+    "slug": "/news/starts-d",
+    "date": "2025-04-01",
+    "img": "/b/b_30052024_2.jpg",
+    "type": "promotions"
+  },
+  {
+    "title": "СЕРЦЕ – МОТОР ВАШОГО ОРГАНІЗМУ",
+    "description": "7 показників роботи серця і судин зі знижкою!",
+    "slug": "/news/heart",
+    "date": "2025-04-01",
+    "type": "promotions",
+    "img": "/b/b_30052024_3.jpg"
+  },
+  {
+    "title": "ПЕЧІНКОВІ ПРОБИ",
+    "description": "4 показники здоров'я печінки зі знижкою!",
+    "slug": "/news/healthy-liver",
+    "date": "2025-04-01",
+    "type": "promotions",
+    "img": "/b/b_30052024_4.jpg"
+  },
+  {
+    "title": "ТИРЕОЇДНИЙ СКРИНІНГ",
+    "description": "2 показники роботи щитовидної залози зі знижкою!",
+    "slug": "/news/thyroid-screening",
+    "date": "2025-04-01",
+    "type": "promotions",
+    "img": "/b/b_30052024_5.jpg"
+  },
+  {
+    "title": "ВСЕСВІТНІЙ ДЕНЬ БОРОТЬБИ З ГЕПАТИТАМИ",
+    "description": "Пройдіть обстеження зі знижкою!",
+    "slug": "/news/hepatitis",
+    "date": "2024-07-15",
+    "img": "/b/b_15072024.jpg",
+    "type": "promotions"
+  },
+  {
+    "title": "Ми завжди поруч",
+    "description": "Виклик медсестри додому чи в офіс",
+    "slug": "/news/we-are-always-there",
+    "date": "2023-06-30",
+    "type": "news",
+    "img": "/b/b_1.jpg"
+  },
+  {
+    "title": "1 червня – День захисту дітей",
+    "description": "Знижка 15% на комплекси лабораторних досліджень для малюків і школярів.",
+    "slug": "/news/june-1-childrens-protection-day",
+    "date": "2023-06-01",
+    "type": "old",
+    "img": "/b/b1.jpg"
+  },
+  {
+    "title": "Результати аналізів у смартфоні",
+    "description": "Відтепер наші пацієнти мають можливість отримувати результати аналізів у Viber або Telegram",
+    "slug": "/news/analysis-results-in-your-smartphone",
+    "date": "2022-08-24",
+    "type": "news",
+    "img": "/b/b_2.jpg"
+  },
+  {
+    "title": "Чи є алергія на анестезію?",
+    "description": "Визначення індивідуальної чутливості до місцевого анестетика",
+    "slug": "/news/determination-of-sensitivity-to-local-anesthetics",
+    "date": "2022-01-25",
+    "img": "/b/b_6.jpg"
+  }
+]

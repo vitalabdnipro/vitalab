@@ -23,8 +23,6 @@ import { z } from "zod"
 
 import { AddProfileModal } from "./add-profile-modal-new"
 
-// import { AddProfileModal } from "./add-profile-modal"
-
 type FormValues = {
   firstName: string
   lastName: string

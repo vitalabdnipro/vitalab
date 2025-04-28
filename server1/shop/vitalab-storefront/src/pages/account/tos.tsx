@@ -11,7 +11,6 @@ import Head from "@modules/common/components/head"
 import { api } from "@utils/api"
 import { useAtomValue } from "jotai"
 import { userDataAtom, userPhoneAtom } from "stores/user-data-store"
-// import Layout from "@modules/layout/templates"
 import type { NextPageWithLayout } from "types/global"
 import { z } from "zod"
 

@@ -40,24 +40,6 @@ export const TermsModal = ({ openTerms, setTermsOpen }) => {
   })
   const [checked, setChecked] = useState(false)
 
-  //   useEffect(() => {
-  //     console.log("test")
-  //     function handleScroll() {
-  //       const scrolledToBottom =
-  //         myRef?.current?.scrollTop + myRef?.current?.clientHeight >=
-  //         myRef?.current?.scrollHeight
-  //       setIsScrolledToBottom(scrolledToBottom)
-  //     }
-  //     myRef?.current?.addEventListener("scroll", handleScroll)
-  //     console.log(myRef)
-
-  //     return () => {
-  //       console.log("removed")
-  //       console.log(myRef)
-  //       return myRef?.current?.removeEventListener("scroll", handleScroll)
-  //     }
-  //   }, [myRef])
-
   const handleScroll = useCallback(() => {
     const element = contentRef.current
     if (element?.scrollHeight - element?.scrollTop === element?.clientHeight) {

@@ -19,7 +19,6 @@ const CheckoutForm = () => {
         </div>
 
         <div>
-          {/* <Shipping cart={cart} /> */}
           <Laboratory cart={cart} />
         </div>
 

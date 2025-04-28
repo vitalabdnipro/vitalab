@@ -2,7 +2,6 @@ import { Layout } from "@components/common";
 import AccountLayout from "@modules/account/templates/account-layout";
 import ProfileTemplate from "@modules/account/templates/profile-template";
 import Head from "@modules/common/components/head";
-// import Layout from "@modules/layout/templates"
 import type { ReactElement } from "react";
 import type { NextPageWithLayout } from "types/global";
 

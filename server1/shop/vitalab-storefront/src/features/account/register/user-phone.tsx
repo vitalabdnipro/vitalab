@@ -69,15 +69,6 @@ const UserPhone = (props) => {
         текстове повідомлення із чотиризначним кодом підтвердження.
       </h3>
       <div className="flex w-full flex-col">
-        {/* <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="last_name">Телефон</Label>
-          <Input
-            id="last_name"
-            {...register("last_name", { required: "Прізвище обов’язкове" })}
-            autoComplete="family-name"
-            errors={errors}
-          />
-        </div> */}
         <div className="grid w-full items-center gap-1.5">
           <Label htmlFor="phone">Телефон</Label>
           <Controller

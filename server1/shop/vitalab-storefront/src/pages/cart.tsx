@@ -49,34 +49,6 @@ const Cart = () => {
 
   updateCartItems()
 
-  // useEffect(() => {
-  //   const updateCartItem = async (item: LineItem) => {
-  //     try {
-  //       if (cart?.id && item.quantity > 1) {
-  //         await medusaClient.carts.lineItems.update(cart.id, item.id, {
-  //           quantity: 1,
-  //         })
-  //       }
-  //     } catch (error) {
-  //       console.error("Error updating cart item:", error)
-  //     }
-  //   }
-
-  //   const updateCartItems = async () => {
-  //     if (cart?.items) {
-  //       for (const item of cart.items) {
-  //         await updateCartItem(item)
-  //       }
-  //     }
-  //   }
-
-  //   updateCartItems()
-  // }, [cart?.id, cart?.items])
-
-  // if (!cart.items.length) {
-  //   router.push("/analyzes/55")
-  // }
-
   return (
     <Section>
       <div className="pb-20">
@@ -101,17 +73,6 @@ const Cart = () => {
               </div>
             </div>
           )}
-
-          {/* <CheckoutTemplate data={items} /> */}
-          {/* {cart.items.length ? (
-            <CheckoutTemplate data={items} />
-          ) : (
-            <div className="grid h-[239px] grid-cols-4">
-              <div className="col-span-2 col-start-2 rounded-lg border bg-white shadow-lg">
-                <h2 className="mb-4 text-2xl font-semibold">Кошик порожній</h2>
-              </div>
-            </div>
-          )}*/}
         </div>
       </div>
     </Section>
@@ -124,26 +85,3 @@ Cart.getLayout = (page: ReactElement) => {
 
 export default Cart
 
-{
-  /* <Section>
-        <div className="pb-32">
-          <div
-            className="section__row-layout"
-            style={
-              {
-                "--row-layout-gap": `var(--row-layout-gap-xlarge)`,
-              } as React.CSSProperties
-            }
-          >
-            <Breadcrumbs title="Кошик" />
-            <div className="">
-              {cart.items.length ? (
-                <div>
-                  <ItemsTable items={items} />
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </Section> */
-}

@@ -1,15 +1,12 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-// import { Button } from "@components/atoms/button"
 import { Input } from "@components/atoms/input"
 import { Label } from "@components/atoms/label"
 import { PasswordInput } from "@components/atoms/password-input"
 import { Button } from "@components/v2/button"
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
-// import Button from "@modules/common/components/button"
-// import Input from "@modules/common/components/input"
 import { useForm, type FieldValues } from "react-hook-form"
 import { api } from "utils/api"
 
@@ -72,13 +69,6 @@ const Login = () => {
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="password">Пароль</Label>
-            {/* <Input
-              id="password"
-              {...register("password", { required: "Password is required" })}
-              type="password"
-              //   autoComplete="current-password"
-              errors={errors}
-            /> */}
             <PasswordInput
               id="password"
               {...register("password", { required: "Password is required" })}

@@ -10,23 +10,6 @@ const Content = (props) => {
   const [isOpen, setIsOpen] = React.useState(props.code === "56")
   const router = useRouter()
   const scroll = !!props.executeScroll
-  // {size.width < 640 ? (
-  //   <a
-  //     href={node.data.id.toString()}
-  //     onClick={(e) => {
-  //       e.preventDefault()
-  //       router
-  //         .push(node.data.id.toString())
-  //         .then(() => executeScroll())
-  //     }}
-  //   >
-  //     {node.data.name}1
-  //   </a>
-  // ) : (
-  //   <Link href={node.data.id.toString()}>
-  //     {node.data.name}
-  //   </Link>
-  // )}
   return (
     <div className="my-[18px] first:mt-0">
       <Collapsible.Root open={isOpen} onOpenChange={setIsOpen} className="test">
@@ -96,7 +79,6 @@ const Content = (props) => {
                         }
                       )}
                     >
-                      {/* <Link href={`${item.data.id}`}>{item.data.name}</Link> */}
                       <button
                         className="text-left"
                         onClick={() =>
