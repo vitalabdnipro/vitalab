@@ -1,7 +1,7 @@
 import type { ReactElement } from "react"
 import Link from "next/link"
 import { AddCartButton } from "@components/atoms/add-cart-button"
-import { Layout } from "@components/common"
+import { ContactInfo, Layout } from "@components/common"
 import { Breadcrumbs, Card, Heading, Section } from "@components/ui"
 import { Button } from "@components/v2/button"
 
@@ -65,28 +65,7 @@ const PostPage = ({ data }) => {
                 <Link href="/home">Замовити</Link>
               </Button>
             </div>
-            <p className="px-4 text-m">
-              Додаткова інформація за телефонами:
-              <a
-                className="ml-1 font-medium transition-opacity ease-hover hover:opacity-60"
-                href="tel:+380673105227"
-              >
-                (067) 310-52-27,
-              </a>
-              <a
-                className="ml-1 font-medium transition-opacity ease-hover hover:opacity-60"
-                href="tel:+3800503607575"
-              >
-                (050) 360-75-75
-              </a>
-              ,
-              <a
-                className="ml-1 font-medium transition-opacity ease-hover hover:opacity-60"
-                href="tel:+380632510338"
-              >
-                (063) 251-03-38
-              </a>
-            </p>
+            <ContactInfo />
           </section>
         </div>
       </div>

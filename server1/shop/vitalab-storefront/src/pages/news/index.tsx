@@ -1,5 +1,4 @@
 import { ReactElement } from "react"
-import { useRouter } from "next/router"
 import { Layout } from "@components/common"
 import Breadcrumbs from "@components/ui/breadcrumbs"
 import Section from "@components/ui/section"
