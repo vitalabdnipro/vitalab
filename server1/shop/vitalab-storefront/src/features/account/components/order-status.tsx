@@ -9,9 +9,6 @@ export const OrderStatus = ({
   order: any
   isReady: boolean
 }) => {
-  //   const isReady = order?.data[0]?.forms.every(
-  //     (form: any) => form.status === "created"
-  //   )
 
   const handleOpenPdf = async () => {
     const mergedPdfBlob = await pdfMerge(order?.data[0]?.forms) // assuming forms is an array of PDF forms
@@ -32,10 +29,6 @@ export const OrderStatus = ({
       onClick={handleOpenPdf}
     >
       <span className="relative z-[2] flex items-center gap-1.5">
-        {/* <span className="relative flex h-3 w-3">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
-          <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
-        </span> */}
         Переглянути результати <ExternalLink className="h-4 w-4" />
       </span>
     </button>

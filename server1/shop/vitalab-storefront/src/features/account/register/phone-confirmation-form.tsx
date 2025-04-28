@@ -36,9 +36,6 @@ const PhoneConfirmationForm = (props) => {
       })
       return
     }
-
-    // nextStep()
-    // setOpenTerms(true)
     router.replace("/account/tos")
   }
 
@@ -66,11 +63,6 @@ const PhoneConfirmationForm = (props) => {
       </div>
       <Button
         className="mt-6 w-full"
-        // onClick={async () => {
-        //   // setOpen(true)
-        //   // const promise = await trigger()
-        //   console.log(userPhone)
-        // }}
       >
         Підтвердити та зареєструватися
       </Button>

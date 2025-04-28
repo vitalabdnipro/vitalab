@@ -21,7 +21,6 @@ import LoginTemplate from "@modules/account/templates/login-template"
 import Head from "@modules/common/components/head"
 import { cn } from "@utils/cn"
 import { useForm } from "react-hook-form"
-// import Layout from "@modules/layout/templates"
 import type { NextPageWithLayout } from "types/global"
 import { z } from "zod"
 

@@ -13,7 +13,6 @@ import { useModal } from "@hooks/use-modal"
 import type { Order } from "@medusajs/medusa"
 import { api } from "@utils/api"
 import { Eye, Info, InfoIcon } from "lucide-react"
-// import Button from "@modules/common/components/button"
 import { formatAmount } from "medusa-react"
 
 import { OrderStatus } from "../order-status"
@@ -30,22 +29,6 @@ const OrderCard = ({ order }: OrderCardProps) => {
   })
   //const [ ready, setReady ] = useState(false)
   const [active, open, close] = useModal()
-
-  // const numberOfLines = useMemo(() => {
-  //   return order.items
-  //     .filter((item) => item.variant.product?.metadata.category.code !== 14)
-  //     .reduce((acc, item) => {
-  //       return acc + item.quantity
-  //     }, 0)
-  // }, [order])
-
-  // const numberOfProducts = useMemo(() => {
-  //   return order.items.length
-  // }, [order])
-
-  // if (!data) {
-  //   return <div>Error...</div>
-  // }
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -74,10 +57,6 @@ const OrderCard = ({ order }: OrderCardProps) => {
   if (!data?.data[0]) {
     return <div>Not found</div>
   }
-
-  // const isReady = data.data[0].forms.every(
-  //   (form: any) => form.status === "created"
-  // )
   
   const isReady = data.data[0].forms
     .filter((f: any) => f.name !== "Без бланка")

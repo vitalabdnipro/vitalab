@@ -118,41 +118,6 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
               <div className="w-full">
                 <LaboratorySelect />
               </div>
-              {/* <RadioGroup
-                value={value}
-                onChange={(value: string) => handleChange(value, onChange)}
-              >
-                {shippingMethods && shippingMethods.length ? (
-                  shippingMethods.map((option) => {
-                    return (
-                      <RadioGroup.Option
-                        key={option.value}
-                        value={option.value}
-                        className={clsx(
-                          "flex items-center justify-between text-small-regular cursor-pointer py-4 border-b border-gray-200 last:border-b-0 px-8",
-                          {
-                            "bg-gray-50": option.value === value,
-                          }
-                        )}
-                      >
-                        <div className="flex items-center gap-x-4">
-                          <Radio checked={value === option.value} />
-                          <span className="text-base-regular">
-                            {option.label}
-                          </span>
-                        </div>
-                        <span className="justify-self-end text-gray-700">
-                          {option.price}
-                        </span>
-                      </RadioGroup.Option>
-                    )
-                  })
-                ) : (
-                  <div className="flex flex-col items-center justify-center px-4 py-8 text-gray-900">
-                    <Spinner />
-                  </div>
-                )}
-              </RadioGroup> */}
               <ErrorMessage
                 errors={errors}
                 name="soId"

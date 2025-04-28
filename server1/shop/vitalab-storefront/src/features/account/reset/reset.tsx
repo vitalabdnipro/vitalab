@@ -6,8 +6,6 @@ import { Input } from "@components/atoms/input"
 import { Label } from "@components/atoms/label"
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
-// import Button from "@modules/common/components/button"
-// import Input from "@modules/common/components/input"
 import { useForm, type FieldValues } from "react-hook-form"
 import { api } from "utils/api"
 
@@ -51,9 +49,6 @@ const ResetPassword = () => {
       <h1 className="text-large-semi mb-10">
         Відновлення пароля від особистого кабінету
       </h1>
-      {/* <p className="text-base-regular mb-8 text-center text-gray-700">
-        Sign in to access an enhanced shopping experience.
-      </p> */}
       <form className="w-full" onSubmit={onSubmit}>
         <div className="flex w-full flex-col">
           <div className="mb-2 grid w-full max-w-sm items-center gap-1.5">

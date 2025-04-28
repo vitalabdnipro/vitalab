@@ -18,7 +18,6 @@ const ProfileTemplate = () => {
     <div className="flex w-full flex-1 flex-col rounded-[5px] bg-white shadow-[0_2px_4px_rgba(0,0,0,0.06),0_4px_12px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.04)]">
       <div className="p-6">
         <div className="mb-8 flex flex-col gap-y-4">
-          {/* <h1 className="text-2xl-semi">Обліковий запис</h1> */}
           <Text as="p" size="sm">
             Переглядайте та оновлюйте Вашу інформацію, включаючи персональні
             дані, електронну адресу та номер телефону. Ви також можете змінити
@@ -33,8 +32,6 @@ const ProfileTemplate = () => {
           <ProfilePhone customer={customer} />
           <Divider />
           <ProfilePassword customer={customer} />
-          {/* <Divider /> */}
-          {/* <ProfileBillingAddress customer={customer} /> */}
         </div>
       </div>
     </div>

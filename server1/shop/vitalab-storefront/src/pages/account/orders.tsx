@@ -2,7 +2,6 @@ import { Layout } from "@components/common"
 import AccountLayout from "@modules/account/templates/account-layout"
 import OrdersTemplate from "@modules/account/templates/orders-template"
 import Head from "@modules/common/components/head"
-// import Layout from "@modules/layout/templates"
 
 import type { NextPageWithLayout } from "types/global"
 

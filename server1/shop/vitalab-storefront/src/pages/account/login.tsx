@@ -6,7 +6,6 @@ import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
 import LoginTemplate from "@modules/account/templates/login-template"
 import Head from "@modules/common/components/head"
 import { AlertCircle, Terminal } from "lucide-react"
-// import Layout from "@modules/layout/templates"
 import type { NextPageWithLayout } from "types/global"
 
 const Login: NextPageWithLayout = () => {

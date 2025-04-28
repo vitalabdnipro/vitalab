@@ -25,8 +25,6 @@ import { TermsModal } from "@features/account/components/terms-modal/terms-modal
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
 import { Info } from "lucide-react"
-// import Button from "@modules/common/components/button"
-// import Input from "@modules/common/components/input"
 import { Controller, useForm, type FieldValues } from "react-hook-form"
 import { api } from "utils/api"
 
@@ -49,18 +47,6 @@ const Register = () => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  // const mutation = trpc.customer.update.useMutation({
-  //   onSuccess: () => {
-  //     // console.log(refetchCustomer);
-  //     // refetchCustomer();
-  //     router.push("/account");
-  //     console.log("test");
-  //     // router.push("/account");
-  //   },
-  //   // onError: (error) => {
-  //   //   console.log("ggggg", error.message);
-  //   // },
-  // });
   const mutation = api.customer.create.useMutation({
     onSuccess: (data) => {
       console.log(data)
@@ -89,16 +75,6 @@ const Register = () => {
     setError,
   } = useForm<RegisterCredentials>()
 
-  // const onSubmit = handleSubmit(async (credentials) => {
-  //   medusaClient.customers
-  //     .create(credentials)
-  //     .then((e) => {
-  //       mutation.mutate({ id: e.customer.id });
-  //       //
-  //     })
-  //     .catch(handleError);
-  // });
-
   const onSubmit = handleSubmit(async (credentials) => {
     if (credentials.password !== credentials.confirm_password) {
       setError("confirm_password", {
@@ -115,9 +91,6 @@ const Register = () => {
       <h1 className="text-large-semi mb-10">
         Створіть обліковий запис VitaLab
       </h1>
-      {/* <p className="text-base-regular mb-4 text-center text-gray-700">
-        Створити обліковий запис
-      </p> */}
       <form className="flex w-full flex-col" onSubmit={onSubmit}>
         <div className="flex w-full flex-col gap-y-4">
           <div className="grid w-full items-center gap-1.5">
@@ -205,14 +178,6 @@ const Register = () => {
               // }}
               render={({ field }) => <PhoneInput id="phone" {...field} />}
             />
-            {/* <Input
-              id="phone"
-              {...register("phone", {
-                required: "Необхідно вказати телефон",
-              })}
-              autoComplete="tel"
-              errors={errors}
-            /> */}
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div className="grid w-full max-w-sm items-center gap-1.5">
