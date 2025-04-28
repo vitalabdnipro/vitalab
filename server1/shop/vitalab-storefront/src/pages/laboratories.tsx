@@ -20,7 +20,7 @@ import { Eye, EyeOff } from "lucide-react"
 
 import femaleSexGender from "/public/i/female-sex-gender.png"
 import visa from "/public/logo/visa-logo.png"
-import defaultData from "../../../../data/pages_laboratories.json"
+import defaultData from "../../data/pages_laboratories.json"
 
 // import kid from "/public/img/kid.png"
 
