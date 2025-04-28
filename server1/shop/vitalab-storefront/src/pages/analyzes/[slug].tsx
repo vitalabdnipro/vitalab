@@ -25,12 +25,6 @@ type Category = {
   slug: string
 }
 
-// ];
-
-// const querySchema = z.object({
-//   id: z.string(),
-// });
-
 let MEDUSA_BACKEND_URL = "http://localhost:9000"
 
 if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
@@ -56,42 +50,10 @@ const Slug = (props) => {
     },
   })
 
-  // if (!slug || !categories.data) {
-  //   return <div>loading</div>
-  // }
   const isLoading = !slug || !categories.data
-  // if (isLoading || !data) {
-  //   return <div>loading...</div>
-  // }
-
-  // console.log("data", data)
-  // const analyzes = data
-  //   .map((product) => {
-  //     return {
-  //       product: product,
-  //       calculated_price: product.variants[0].calculated_price,
-  //       original_price: product.variants[0].original_price,
-  //       price_type: product.variants[0].calculated_price_type,
-  //       percentage_diff: getPercentageDiff(
-  //         product.variants[0].calculated_price,
-  //         product.variants[0].original_price
-  //       ),
-  //     }
-  //   })
-  //   .sort((a, b) => a.product.mid_code - b.product.mid_code)
 
   console.log("analyzes", categories)
   return (
-    // <div className="grid grid-cols-[360px_1fr] gap-x-16 p-1">
-    //   <div className="my-4">
-    //     <AnalyzesSidebar />
-    //   </div>
-    //   <div className="">
-    //     <div className="grid gap-y-2">
-    //       <ListAnalyzes analyzes={analyzes} />
-    //     </div>
-    //   </div>
-    // </div>
     <div className="grid gap-x-16 p-1 md:grid-cols-[360px_1fr]">
       <div className="my-4">
         {!isLoading ? (
@@ -157,92 +119,6 @@ const Slug = (props) => {
     </div>
   )
 }
-
-// export async function getServerSideProps(context) {
-//   const { id } = querySchema.parse(context.query);
-
-//   return {
-//     props: { id }, // will be passed to the page component as props
-//   };
-// }
-
-// const getPercentageDiff = (original: number, calculated: number) => {
-//   const diff = calculated - original
-//   const decrease = (diff / original) * 100
-//   const fixed = Math.round(decrease * 1) / 1
-
-//   return fixed
-// }
-
-// export async function getServerSideProps() {
-//   const categoriesResponse = await fetch(
-//     `${MEDUSA_BACKEND_URL}/store/categories`
-//   )
-
-//   const response = await categoriesResponse.json()
-//   const categoriesData = await response.filter((obj) => obj.id !== 14)
-
-//   // Pass data to the page via props
-//   return { props: { categoriesData } }
-// }
-
-// export async function getStaticPaths() {
-//   const response = await fetch(`${MEDUSA_BACKEND_URL}/store/categories`)
-//   const categories = await response.json()
-
-//   return {
-//     paths: categories.map((c: Category) => ({
-//       params: { slug: c.id.toString() },
-//     })),
-//     fallback: false, // can also be true or 'blocking'
-//   }
-// }
-
-// export async function getStaticProps({ params }) {
-//   const categoriesResponse = await fetch(
-//     `${MEDUSA_BACKEND_URL}/store/categories`
-//   )
-//   const { products } = await medusaClient.products.list({
-//     limit: 1000,
-//     currency_code: "uah",
-//   })
-
-//   const response = await categoriesResponse.json()
-//   const categoriesData = await response
-//     .filter((obj) => obj.id !== 14)
-//     .map((obj) => {
-//       const count = products.filter(
-//         (a) => a.metadata?.category?.code === obj.id
-//       ).length
-//       return { ...obj, count: count }
-//     })
-//   // console.log("categoriesData", categoriesData)
-
-//   // console.log(params);
-//   // получаем все анализы в категории
-
-//   const analyzes = products
-//     .filter((analysis: any) => {
-//       return analysis.metadata?.category?.code === +params.slug
-//     })
-//     .map((p, _, array) => {
-//       return {
-//         product: p,
-//         calculated_price: p.variants[0].calculated_price,
-//         original_price: p.variants[0].original_price,
-//         price_type: p.variants[0].calculated_price_type,
-//         percentage_diff: getPercentageDiff(
-//           p.variants[0].calculated_price,
-//           p.variants[0].original_price
-//         ),
-//       }
-//     })
-//     .sort((a, b) => a.product.mid_code - b.product.mid_code)
-
-//   return {
-//     props: { analyzes, categoriesData },
-//   }
-// }
 
 Slug.getLayout = (page: ReactElement) => {
   return <AnalyzesLayout>{page}</AnalyzesLayout>

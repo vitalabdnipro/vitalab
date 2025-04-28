@@ -10,8 +10,8 @@ export const mailRouter = createTRPCRouter({
     )
     .mutation(async ({ input }) => {
       const response = transporter.sendMail({
-        from: "vitalab@vitalab.com.ua",
-        to: "info@vitalab.com.ua",
+        from: process.env.NODEMAILER_FROM_EMAIL || "vitalab@vitalab.com.ua",
+        to: process.env.NODEMAILER_TO_EMAIL || "info@vitalab.com.ua",
         subject: `VitaLab - Виклик медсестри`,
         text: "_",
         html: `<!doctype html>

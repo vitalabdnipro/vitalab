@@ -23,18 +23,18 @@ export const authRouter = createTRPCRouter({
       const formattedPhoneNumber = `${input.phone.replace(/\D/g, "")}`
       console.log("otp:", input.otp)
 
-      const response = await fetch("https://api.omnicell.com.ua/ip2sms/", {
+      const response = await fetch(process.env.SMS_API_URL || "https://api.omnicell.com.ua/ip2sms/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: "Basic Vml0YUxhYjpWaXRhTGFiX1NNUw==",
+          Authorization: `Basic ${process.env.SMS_API_AUTH || "Vml0YUxhYjpWaXRhTGFiX1NNUw=="}`,
         },
         body: JSON.stringify({
           id: "single",
           validity: "+30 min",
           extended: true,
-          source: "VitaLab",
+          source: process.env.SMS_SOURCE || "VitaLab",
           desc: "Simple bulk via json",
           type: "SMS",
           to: [

@@ -24,12 +24,5 @@ const userDataAtom = atom<UserData>({
 })
 const userPhoneAtom = atom({ phone: "" })
 const otpAtom = atom<string>("")
-// const readWriteAtom = atom(
-//   (get) => get(priceAtom) * 2,
-//   (get, set, newPrice) => {
-//     set(priceAtom, newPrice / 2)
-//     // you can set as many atoms as you want at the same time
-//   }
-// )
 
 export { userDataAtom, userPhoneAtom, otpAtom }

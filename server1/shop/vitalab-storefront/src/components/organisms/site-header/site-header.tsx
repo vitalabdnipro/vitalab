@@ -29,16 +29,6 @@ function SiteHeader() {
       {/* SiteHeader__container */}
       <div className={s.header__container}>
         {/* SiteHeader__navContainer */}
-        {/* <div
-          className="flex w-full justify-center bg-green-200 hover:text-blue-600"
-          onClick={() => {
-            localStorage.clear()
-            window.location.reload()
-          }}
-        >
-          Режим розробки. Очистити кеш.
-        </div> */}
-        {/* <div className="flex min-h-[56px] items-center justify-between px-4 pb-3 pt-8 md:pt-3"> */}
         <div className="flex min-h-[60px] items-center justify-between px-4 py-3 md:pt-3">
           {/* SiteHeader__logo */}
           <div className={s.logo}>
@@ -49,19 +39,6 @@ function SiteHeader() {
           </div>
 
           {/* SiteHeaderNav */}
-          {/* <nav>
-            SiteHeaderNav__list
-            <ul className="hidden items-center m-0 p-0 list-none md:flex">
-              SiteHeaderNavItem
-              {links.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href}>
-                    <a className={s.link}>{link.label}</a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav> */}
           <MainNav />
           <CartDropdown />
           <MobileNav />

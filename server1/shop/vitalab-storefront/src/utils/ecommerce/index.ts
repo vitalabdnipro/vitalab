@@ -32,8 +32,11 @@ export const eCommerce = ({
   data: Record<string, unknown>
 }) => {
   const dataLayer = window.dataLayer
+  const storageKey = typeof window !== "undefined" && window.process?.env?.NEXT_PUBLIC_ECOMMERCE_STORAGE_KEY 
+    ? window.process.env.NEXT_PUBLIC_ECOMMERCE_STORAGE_KEY 
+    : "medusa-ecommerce-events"
   let sentEvents = JSON.parse(
-    localStorage.getItem("medusa-ecommerce-events") || "{}"
+    localStorage.getItem(storageKey) || "{}"
   )
 
   console.log("data", data)
@@ -59,7 +62,7 @@ export const eCommerce = ({
       // This ensures that each cardId has a unique list of sent events
       sentEvents[cardId] = [...(sentEvents[cardId] || []), event]
       localStorage.setItem(
-        "medusa-ecommerce-events",
+        storageKey,
         JSON.stringify(sentEvents)
       )
     }

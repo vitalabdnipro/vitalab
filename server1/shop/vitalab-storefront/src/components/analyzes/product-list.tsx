@@ -26,37 +26,17 @@ const Button = ({ children, loading, ...props }) => (
 )
 
 const ProductCard = ({ data, loading, setLoading }) => {
-  // const {
-  //   product,
-  //   calculated_price,
-  //   original_price,
-  //   price_type,
-  //   percentage_diff,
-  // } = data
   const { storeCart } = useStore()
   const { cart, setCart } = useCart()
   const { product, isLoading } = useProduct(data?.variants[0]?.product_id)
 
-  // const mutation = useAddItem();
   const mutation = api.cart.add.useMutation({
     onSuccess: (cart) => {
       setCart(cart)
       storeCart(cart.id)
       setLoading(false)
-      // timedOpen();
     },
   })
-
-  // const price = useProductPrice({
-  //   id: data.id,
-  //   variantId: data.variants[0]?.id,
-  // });
-
-  // const selectedPrice = useMemo(() => {
-  //   const { variantPrice, cheapestPrice } = price;
-
-  //   return variantPrice || cheapestPrice || null;
-  // }, [price]);
 
   const getPercentageDiff = useMemo(() => {
     const diff =
@@ -67,30 +47,17 @@ const ProductCard = ({ data, loading, setLoading }) => {
     return fixed
   }, [data.variants])
 
-  // const percentageDiff = getPercentageDiff(
-  //   data.variants[0].calculated_price,
-  //   data.variants[0].original_price
-  // )
-
   if (!cart?.id) {
     return <div className="">...</div>
   }
 
   const inCart = cart?.items.some((item) => item.variant.product.id === data.id)
 
-  // console.log(
-  //   "getPercentageDiff",
-  //   getPercentageDiff,
-  //   data.variants[0].calculated_price_type === "sale"
-  // )
-
   const tooltipContent = data?.description.split(";")
 
   return (
-    // <Link href={`/analysis/${data.handle}`} passHref>
     //background-image: linear-gradient(165deg,var(--start-color),var(--end-color));
     <>
-      {/* {selectedPrice && ( */}
       <div className="relative group">
         <Link
           className="absolute z-[1] h-full w-full rounded-[8px] group-hover:shadow-lg transition-shadow"
@@ -108,9 +75,6 @@ const ProductCard = ({ data, loading, setLoading }) => {
                 }
               )}
             >
-              {/* <div className="absolute -right-1.5 top-[calc(80%/2)] -rotate-90 transform font-medium text-gray-700">
-            Акція
-          </div> */}
             </div>
           )}
         <Card
@@ -121,7 +85,6 @@ const ProductCard = ({ data, loading, setLoading }) => {
             }
           )}
         >
-          {/* {selectedPrice ? ( */}
           <div className="grid h-full gap-x-6 md:grid-cols-[1fr_150px]">
             <div className="flex-col items-center gap-x-2 p-4">
               <div className="flex flex-row items-center gap-x-3">
@@ -139,13 +102,6 @@ const ProductCard = ({ data, loading, setLoading }) => {
                     : "днів"}
                 </div>
                 {data.description && (
-                  // <Tooltip
-                  //   content={tooltipContent}
-                  //   className="max-h-40 w-[600px] rounded-lg border border-gray-200 bg-white p-4 text-s shadow-sm"
-                  //   sideOffset={7}
-                  // >
-                  //   <InformationCircleIcon className="h-5 w-5 text-gray-400 transition ease-hover hover:text-gray-800" />
-                  // </Tooltip>
                   <Modal.Root>
                     <Modal.Trigger className="z-10">
                       <InformationCircleIcon className="h-5 w-5 text-green-600 transition ease-hover hover:text-green-800 z-10" />
@@ -165,7 +121,6 @@ const ProductCard = ({ data, loading, setLoading }) => {
                       })}
                     </Modal.Body>
                   </Modal.Root>
-                  //
                 )}
                 {data.variants[0].calculated_price_type === "sale" &&
                 getPercentageDiff > 11 ? (
@@ -173,9 +128,6 @@ const ProductCard = ({ data, loading, setLoading }) => {
                     <span className="inline-flex items-center rounded bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">
                       Акція
                     </span>
-                    {/* <span className="inline-flex items-center rounded bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">
-                      {percentage_diff}%
-                    </span> */}
                   </>
                 ) : (
                   <div></div>
@@ -186,9 +138,6 @@ const ProductCard = ({ data, loading, setLoading }) => {
                   {data.title}
                 </h4>
               </div>
-              {/* <div className="mt-2 flex flex-row ">
-            <InformationCircleIcon className="h-5 w-5" />
-          </div> */}
             </div>
             <div className="h-full items-center p-1">
               <div
@@ -212,24 +161,8 @@ const ProductCard = ({ data, loading, setLoading }) => {
                     {`${data.variants[0].calculated_price / 100} грн`}
                   </div>
                 </div>
-                {/* {!mutation.isLoading ? ( */}
                 <div className="flex w-full z-10">
                   {!inCart ? (
-                    // <Button
-                    //   type="primary"
-                    //   loading={mutation.isLoading}
-                    //   disabled={loading}
-                    //   onClick={() => {
-                    //     setLoading(true)
-                    //     mutation.mutate({
-                    //       cartId: cart?.id,
-                    //       manipulationId: product.metadata?.manipulation_id,
-                    //       variantId: product.variants[0].id,
-                    //     })
-                    //   }}
-                    // >
-                    //   Замовити
-                    // </Button>
                     <Button
                       loading={mutation.isLoading || isLoading}
                       disabled={loading || isLoading}
@@ -266,54 +199,14 @@ const ProductCard = ({ data, loading, setLoading }) => {
                     </Button>
                   ) : (
                     <Button disabled>У кошику</Button>
-                    // <Button
-                    //   onClick={() => {
-                    //     setLoading(true)
-                    //     eCommerceCart({
-                    //       cardId: cart?.id,
-                    //       event: "purchase",
-                    //       data: {
-                    //         items: [
-                    //           {
-                    //             item_name: product?.title,
-                    //             item_id: product?.mid_code,
-                    //             price: (
-                    //               data.variants[0].calculated_price / 100
-                    //             ).toFixed(2),
-                    //             item_brand: "Vitalab",
-                    //             quantity: 1,
-                    //             ...transformCategories(
-                    //               product?.metadata?.category_tree as any
-                    //             ),
-                    //           },
-                    //         ],
-                    //       },
-                    //     })
-                    //     mutation.mutate({
-                    //       cartId: cart?.id,
-                    //       manipulationId: data.metadata?.manipulation_id,
-                    //       variantId: data.variants[0].id,
-                    //     })
-                    //   }}
-                    // >
-                    //   У кошику
-                    // </Button>
                   )}
                 </div>
-                {/* {mutation.error && (
-            <p>Something went wrong! {mutation.error.message}</p>
-          )} */}
               </div>
             </div>
           </div>
-          {/* ) : (
-        <div>Loading...</div>
-      )} */}
         </Card>
       </div>
-      {/* )} */}
     </>
-    // </Link>
   )
 }
 
