@@ -1,6 +1,7 @@
 import { useMemo } from "react"
-import { formatAmount, useCart, useProducts } from "medusa-react"
+import { formatAmount, useCart } from "medusa-react"
 import type { CalculatedVariant } from "types/medusa"
+import { api } from "utils/api"
 
 type useProductPriceProps = {
   id: string
@@ -10,12 +11,13 @@ type useProductPriceProps = {
 const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
   const { cart } = useCart()
 
-  const { products, isLoading, isError } = useProducts(
+  // Use tRPC to fetch products instead of direct Medusa API call to avoid CORS
+  const { data: products, isLoading, isError } = api.product.getWithCart.useQuery(
     {
       id: id,
       cart_id: cart?.id,
     },
-    { enabled: !!cart }
+    { enabled: !!cart && !!id }
   )
 
   const product = products?.[0]

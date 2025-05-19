@@ -1,50 +1,47 @@
 {
-  email admin@vitalab.com.ua
+    email admin@{$VITALAB_DOMAIN}
 }
 
-vitalab.com.ua {
+{$VITALAB_DOMAIN} {
     reverse_proxy vitalab-storefront:8000
 }
 
-results.vitalab.com.ua {  	
+results.{$VITALAB_DOMAIN} {  	
     reverse_proxy vitalab-results:3001
 }
 
-pay.vitalab.com.ua {
+pay.{$VITALAB_DOMAIN} {
     reverse_proxy vitalab-pay:3002
 }
 
-admin.vitalab.com.ua {
+admin.{$VITALAB_DOMAIN} {
     reverse_proxy vitalab-core:9000
 }
 
-:9000 {
+# Using only one site definition for port 9000 to avoid ambiguity
+{$VITALAB_DOMAIN}:9000 {
     reverse_proxy vitalab-core:9000
 }
 
-vitalab.com.ua:9000 {
+api.{$VITALAB_DOMAIN} {
     reverse_proxy vitalab-core:9000
 }
 
-api.vitalab.com.ua {
-    reverse_proxy vitalab-core:9000
-}
-
-partners.vitalab.com.ua {  
+partners.{$VITALAB_DOMAIN} {  
   reverse_proxy partners:3000  {
     header_down Strict-Transport-Security max-age=31536000;
   }
 }
 
-r.vitalab.com.ua {  
+r.{$VITALAB_DOMAIN} {  
   root * /usr/share/caddy/r
   file_server
 }
 
-pgadmin.vitalab.com.ua {
+pgadmin.{$VITALAB_DOMAIN} {
   reverse_proxy adminer:8080
 }
 
 www.vitalab.dp.ua, vitalab.dp.ua {
-  redir https://vitalab.com.ua 301
+  redir https://{$VITALAB_DOMAIN} 301
 }

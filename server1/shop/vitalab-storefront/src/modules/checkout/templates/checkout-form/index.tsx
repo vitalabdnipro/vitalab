@@ -1,6 +1,5 @@
 import Addresses from "@modules/checkout/components/addresses"
 import Payment from "@modules/checkout/components/payment"
-import Shipping from "@modules/checkout/components/shipping"
 import Laboratory from "features/checkout/laboratory/laboratory"
 import { useCart } from "medusa-react"
 

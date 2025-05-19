@@ -25,7 +25,8 @@ const NotFound: NextPageWithLayout = () => {
 };
 
 NotFound.getLayout = (page: ReactElement) => {
-  return <Layout>{page}</Layout>;
+  // @ts-ignore
+    return <Layout>{page}</Layout>;
 };
 
 export default NotFound;

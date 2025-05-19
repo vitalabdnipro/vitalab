@@ -22,8 +22,6 @@ import femaleSexGender from "/public/i/female-sex-gender.png"
 import visa from "/public/logo/visa-logo.png"
 import defaultData from "../../data/pages_laboratories.json"
 
-// import kid from "/public/img/kid.png"
-
 type Laboratory = {
   name: string
   address: string
@@ -102,11 +100,6 @@ const columns = [
             )}
             {info.row.original.kid && (
               <div className="relative flex items-center">
-                {/* <Image
-                src={kid}
-                alt="Visa"
-                className="absolute mb-1.5 h-6 w-full -bottom-1 left-0"
-              /> */}
                 <div className="ml-7 bg-auto font-medium before:absolute before:-top-0.5 before:left-0 before:h-full before:w-full before:bg-[url('../../public/img/kid.png')] before:bg-[length:22px] before:bg-no-repeat">
                   {info.row.original.kid}+
                 </div>
@@ -367,6 +360,7 @@ const Laboratories = () => {
 }
 
 Laboratories.getLayout = (page: ReactElement) => {
+  // @ts-ignore
   return <Layout>{page}</Layout>
 }
 

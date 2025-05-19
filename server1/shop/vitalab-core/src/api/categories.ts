@@ -3,8 +3,12 @@ import { projectConfig } from "../../medusa-config";
 
 export default (router) => {
   const storeCorsOptions = {
-    origin: projectConfig.store_cors.split(","),
+    origin: true, // Allow all origins
     credentials: true,
+    methods: ["GET", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Accept"],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   };
 
   router.options("/store/categories", cors(storeCorsOptions));

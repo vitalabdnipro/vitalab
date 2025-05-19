@@ -51,7 +51,8 @@ const Home: NextPageWithLayout = () => {
 }
 
 Home.getLayout = (page: ReactElement) => {
-  return <Layout>{page}</Layout>
+  // @ts-ignore
+    return <Layout>{page}</Layout>
 }
 
 export default Home

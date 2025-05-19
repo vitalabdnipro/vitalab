@@ -25,7 +25,11 @@ const Button = ({ children, loading, ...props }) => (
 )
 
 const RelatedTestCard = ({ id }: { id: string }) => {
-  const { product, isLoading } = useProduct(id)
+  // Use tRPC to fetch product instead of direct Medusa API call to avoid CORS
+  const { data: product, isLoading } = api.product.getById.useQuery(
+    { id },
+    { enabled: !!id }
+  )
   const { storeCart } = useStore()
   const { cart, setCart } = useCart()
   const [loading, setLoading] = useState(false)
@@ -220,7 +224,11 @@ const Tests = () => {
 
   const { storeCart } = useStore()
   const { cart, setCart } = useCart()
-  const { product, isLoading } = useProduct(id as string)
+  // Use tRPC to fetch product instead of direct Medusa API call to avoid CORS
+  const { data: product, isLoading } = api.product.getById.useQuery(
+    { id: id as string },
+    { enabled: !!id }
+  )
   const [loading, setLoading] = useState(false)
   // const { data: productData } = api.product.getById.useQuery(
   //   {

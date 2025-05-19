@@ -29,7 +29,8 @@ import {
   PlusSquare,
   X,
 } from "lucide-react"
-import { useCart, useProduct } from "medusa-react"
+import { useCart } from "medusa-react"
+import { api } from "utils/api"
 
 export type ProductHit = {
   id: string
@@ -113,7 +114,11 @@ const DescriptionModal = ({ hit }: { hit: ProductHit }) => {
 
 const Hit = ({ hit, loading, inCart, addToCart, disabled, close }: HitProps) => {
   const { cart } = useCart()
-  const { product, isLoading } = useProduct(hit.id)
+  // Use tRPC to fetch product instead of direct Medusa API call to avoid CORS
+  const { data: product, isLoading } = api.product.getById.useQuery(
+    { id: hit.id },
+    { enabled: !!hit.id }
+  )
 
   const handleClick = () => {
     if (!cart?.id) {

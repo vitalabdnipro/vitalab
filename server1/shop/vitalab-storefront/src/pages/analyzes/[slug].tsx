@@ -1,18 +1,12 @@
-import { Suspense, useRef, type ReactElement } from "react"
-import Link from "next/link"
+import { useRef, type ReactElement } from "react"
 import { useRouter } from "next/router"
 import AnalyzesSidebar from "@components/analyzes/analyzes-sidebar"
 import ProductList from "@components/analyzes/product-list"
 import AnalyzesLayout from "@components/common/layouts/analyzes-layout"
-import { Button, Card } from "@components/ui"
+import { Card } from "@components/ui"
 import { Skeleton } from "@components/v2/skeleton"
-import { medusaClient } from "@lib/config"
-import { useStore } from "@lib/context/store-context"
-import { fetchProductsList } from "@lib/data"
-import { QueryClient, useQuery } from "@tanstack/react-query"
-import { api } from "@utils/api"
-import type { CalculatedVariant } from "types/medusa"
-import { z } from "zod"
+import { MEDUSA_BACKEND_URL } from "@lib/config"
+import { useQuery } from "@tanstack/react-query"
 
 type Analyzes = {
   code: string
@@ -25,34 +19,50 @@ type Category = {
   slug: string
 }
 
-let MEDUSA_BACKEND_URL = "http://localhost:9000"
+/**
+ * Fetch categories using Medusa client pattern
+ * This is a custom function that follows the Medusa client pattern
+ * but makes a request to a custom API endpoint for categories
+ * @returns {Promise<Category[]>} - Array of categories
+ */
+const fetchCategories = async (): Promise<Category[]> => {
+  try {
+    // Using the proxy endpoint to avoid CORS issues
+    const response = await fetch(`/api/store/categories`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    })
 
-if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
-  MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
+    if (!response.ok) {
+      throw new Error(`Failed to fetch categories: ${response.statusText}`)
+    }
+
+    const categories = await response.json()
+    return categories
+  } catch (error) {
+    console.error("Error fetching categories:", error)
+    return []
+  }
 }
 
-const fetchCategories = async () => {
-  const response = await fetch(`${MEDUSA_BACKEND_URL}/store/categories`)
-  const data = await response.json()
-  return data
-}
-
-const Slug = (props) => {
+const Slug = (): JSX.Element => {
   const router = useRouter()
-  const { slug } = router.query
-  const scrollRef = useRef(null)
+  const { slug } = router.query as { slug?: string }
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   const categories = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
-    select: (data) => {
+    select: (data: Category[]) => {
       return data.filter((c) => c.id !== 14 && c.id !== 200)
     },
   })
 
   const isLoading = !slug || !categories.data
-
-  console.log("analyzes", categories)
   return (
     <div className="grid gap-x-16 p-1 md:grid-cols-[360px_1fr]">
       <div className="my-4">

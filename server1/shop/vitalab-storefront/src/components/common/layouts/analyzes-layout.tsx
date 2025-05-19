@@ -1,9 +1,9 @@
-import AnalyzesSidebar from "@components/analyzes/analyzes-sidebar"
 import { Breadcrumbs, Card, Section } from "@components/ui"
 
 import Layout from "./layout"
 import Head from "@modules/common/components/head"
 
+// @ts-ignore
 const AnalyzesLayout = ({ children }) => {
   return (
     <>

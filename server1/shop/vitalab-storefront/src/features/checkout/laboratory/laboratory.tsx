@@ -6,25 +6,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@components/atoms/select"
-import { RadioGroup } from "@headlessui/react"
 import { ErrorMessage } from "@hookform/error-message"
 import { medusaClient } from "@lib/config"
 import { useCheckout } from "@lib/context/checkout-context"
 import type { Cart } from "@medusajs/medusa"
 import StepContainer from "@modules/checkout/components/step-container"
-import Radio from "@modules/common/components/radio"
-import Spinner from "@modules/common/icons/spinner"
 import { api } from "@utils/api"
 import { formatAmount, useCart, useCartShippingOptions } from "medusa-react"
 import { Controller, useForm } from "react-hook-form"
 import labs from "../../../../data/labs.json"
-
-type ShippingOption = {
-  value: string
-  label: string
-  price: string
-}
-
 type ShippingProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
 }
@@ -33,7 +23,7 @@ type ShippingFormProps = {
   soId: string
 }
 
-const LaboratorySelect = (props) => {
+const LaboratorySelect = (props: { field: any; handleChange: any }) => {
   const { field, handleChange } = props
 
   return (
@@ -44,14 +34,16 @@ const LaboratorySelect = (props) => {
         <SelectValue placeholder="Виберіть пункт забору біоматеріалу..." />
       </SelectTrigger>
       <SelectContent className="ml-6" align="end">
-        {labs.map((lab: { label: string; address: string; value: string }) => (
-          <SelectItem value={lab.value}>
-            <div>
-              <div className="text-left">{lab.label}</div>
-              <div className="text-left text-xs font-normal">{lab.address}</div>
-            </div>
-          </SelectItem>
-        ))}
+        {labs.map((lab: { label: string; address: string; value: string; disabled?: boolean }) => 
+          !lab.disabled && (
+            <SelectItem key={lab.value} value={lab.value}>
+              <div>
+                <div className="text-left">{lab.label}</div>
+                <div className="text-left text-xs font-normal">{lab.address}</div>
+              </div>
+            </SelectItem>
+          )
+        )}
       </SelectContent>
     </Select>
   )

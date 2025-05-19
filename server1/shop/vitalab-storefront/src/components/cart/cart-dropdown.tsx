@@ -1,7 +1,6 @@
 import { Fragment, useMemo } from "react"
 import Link from "next/link"
 import { Card } from "@components/ui"
-import { Button } from "@components/ui/button2"
 import { Popover, Transition } from "@headlessui/react"
 import { useCartDropdown } from "@lib/context/cart-dropdown-context"
 import { useStore } from "@lib/context/store-context"
@@ -9,7 +8,6 @@ import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import Trash from "@modules/common/icons/trash"
-import Thumbnail from "@modules/products/components/thumbnail"
 import { api } from "@utils/api"
 import { eCommerceCart, transformCategories } from "@utils/ecommerce"
 import { formatAmount, useCart } from "medusa-react"
@@ -27,7 +25,6 @@ const CartDropdown = () => {
       // timedOpen();
     },
   })
-  // const totalItems = useMemo(() => countAnalysis(cart.items), [cart.items])
 
   let totalItems = 0
 
@@ -35,39 +32,16 @@ const CartDropdown = () => {
     totalItems = countAnalysis(cart.items)
   }
 
-  console.log(items)
-  // function customComparator(a, b) {
-  //   if (a.includes("14") && !b.includes("14")) {
-  //     return 1
-  //   } else if (!a.includes("14") && b.includes("14")) {
-  //     return -1
-  //   } else {
-  //     return a.localeCompare(b)
-  //   }
-  // }
-
+  // @ts-ignore
   return (
     <div
       className="z-50 hidden h-full md:flex"
       onMouseEnter={open}
       onMouseLeave={close}
     >
-      {/* {console.dir(cart)} */}
       <Popover className="relative h-full">
-        {/* <Link href="/cart" passHref>
-          <Popover.Button
-            as={"div"}
-            className="h-full"
-          >{`My Bag (${totalItems})`}</Popover.Button>
-        </Link> */}
-
         <Popover.Button className="h-full">
-          {/* rgba(66, 71, 112, 0.06) */}
           <Card className="h-[56px] !min-h-full max-w-[290px] cursor-pointer rounded-lg bg-white shadow-[0_0_0_1px_rgb(229,231,235)] transition ease-hover hover:shadow-card-small">
-            {/* <div className="grid py-2 px-6 text-s">
-                <div className="font-semibold">Оформити замовлення</div>
-                <div>test</div>
-              </div> */}
             <div className="relative flex items-center py-2 pl-4 pr-6 text-s">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +49,6 @@ const CartDropdown = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                // className="h-6 w-6 after:absolute after:left-0 after:bottom-2 after:w-px after:bg-slate-900"
                 className="mr-5 h-6 w-6"
               >
                 <path
@@ -110,16 +83,11 @@ const CartDropdown = () => {
             static
             className="absolute left-1/2 z-10 mt-3 hidden w-[400px] -translate-x-1/2 rounded-lg bg-white text-gray-900 shadow-card-medium after:absolute after:-top-3 after:h-0 after:w-full after:border-[6px] after:border-transparent sm:block"
           >
-            {/* <div className="flex items-center justify-center p-4">
-              <h3 className="text-large-semi">Shopping Bag</h3>
-            </div> */}
-            {/* {console.log("items",items)} */}
             {cart && items?.length ? (
               <>
                 <div className="no-scrollbar mt-4 grid max-h-[402px] grid-cols-1 gap-y-6 overflow-y-scroll px-4">
                   {items
                     .sort((a, b) => {
-                      // return a.created_at > b.created_at ? -1 : 1
                       if (
                         a.variant.product.metadata?.category?.code === 14 &&
                         b.variant.product.metadata?.category?.code !== 14
@@ -144,11 +112,7 @@ const CartDropdown = () => {
                             <div className="flex items-start justify-between">
                               <div>
                                 <h3 className="mr-4 w-[220px] overflow-hidden text-ellipsis text-s">
-                                  {/* <Link
-                                    href={`/products/${item.variant.product.handle}`}
-                                  > */}
                                   {item.title}
-                                  {/* </Link> */}
                                 </h3>
                                 <LineItemOptions variant={item.variant} />
                               </div>
@@ -161,10 +125,6 @@ const CartDropdown = () => {
                         <div className="w-[100px]">
                           <div className="flex items-center justify-end divide-x">
                             <div className="flex items-center">
-                              {/* {item.variant.product.metadata?.category?.code !==
-                                464 && (
-                                <span className="mr-1">{item.quantity} x</span>
-                              )} */}
                               <LineItemPrice
                                 region={cart.region}
                                 variant={item.variant as CalculatedVariant}
@@ -176,7 +136,6 @@ const CartDropdown = () => {
                             14 ? (
                               <button
                                 className="ml-2 flex items-center gap-x-1 pl-1 text-gray-500"
-                                // onClick={() => deleteItem(item.id)}
                                 onClick={() => {
                                   eCommerceCart({
                                     event: "remove_from_cart",
@@ -229,7 +188,6 @@ const CartDropdown = () => {
 
                   <Link
                     href="/cart"
-                    // className="border-brand-color bg-brand-color relative inline-flex h-10 w-full max-w-full cursor-pointer items-center justify-center rounded-[5px] border px-3 font-medium text-white transition hover:bg-transparent hover:text-black"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-emerald-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-slate-100"
                     onClick={close}
                   >
@@ -240,19 +198,11 @@ const CartDropdown = () => {
             ) : (
               <div>
                 <div className="flex flex-col items-center justify-center gap-y-4 py-4">
-                  {/* <div className="text-small-regular flex h-6 w-6 items-center justify-center rounded-full bg-gray-900 text-white">
-                    <span>0</span>
-                  </div> */}
                   <span>Кошик порожній</span>
                   <div>
-                    {/* <Link href="/analyzes/1318">
-                      <span className="sr-only">Go to all products page</span>
-                      <Button onClick={close}>Explore products</Button>
-                    </Link> */}
                     <Link
                       href="/analyzes/11"
                       className="inline-flex h-10 items-center justify-center rounded-md bg-emerald-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-slate-100"
-                      // className="border-brand-color bg-brand-color relative inline-flex h-10 w-full max-w-full cursor-pointer items-center justify-center rounded-[5px] border px-3 font-medium text-white transition hover:bg-transparent hover:text-black"
                       onClick={close}
                     >
                       До каталогу

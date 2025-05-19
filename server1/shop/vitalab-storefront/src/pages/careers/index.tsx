@@ -1,5 +1,4 @@
 import type { ReactElement } from "react"
-import Link from "next/link"
 import { Layout } from "@components/common"
 import { Breadcrumbs, Card, Section } from "@components/ui"
 import { Button } from "@components/v2/button"
@@ -23,11 +22,6 @@ const Careers = () => {
         <div className="pb-6 md:mt-0 md:pb-16">
           <div
             className="section__row-layout gap-16"
-            // style={
-            //   {
-            //     "--row-layout-gap": `var(--row-layout-gap-xlarge)`,
-            //   } as React.CSSProperties
-            // }
           >
             <Breadcrumbs title="Кар'єра" />
             <header className="relative grid max-w-[810px] gap-y-6 px-4">
@@ -134,6 +128,7 @@ const Careers = () => {
 }
 
 Careers.getLayout = (page: ReactElement) => {
+  // @ts-ignore
   return <Layout>{page}</Layout>
 }
 

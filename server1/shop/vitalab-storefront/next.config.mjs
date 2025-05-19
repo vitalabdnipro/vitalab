@@ -5,16 +5,11 @@
  */
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
 // const store = require("./store.config.json")
-import store from "./store.config.json" assert { type: "json" };
 
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  // i18n: {
-  //   locales: ["en"],
-  //   defaultLocale: "en",
-  // },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -43,6 +38,14 @@ const config = {
         source: "/analyzes/",
         destination: "/analyzes/55",
         permanent: true,
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/store/:path*",
+        destination: `http://vitalab-core:9000/store/:path*`,
       },
     ];
   },

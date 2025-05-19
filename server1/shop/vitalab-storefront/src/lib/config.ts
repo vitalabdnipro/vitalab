@@ -4,7 +4,11 @@ import { QueryClient } from "@tanstack/react-query";
 // Defaults to standard port for Medusa server
 let MEDUSA_BACKEND_URL = "http://localhost:9000";
 
-if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+// For client-side requests, use the relative URL to leverage Next.js API routes
+if (typeof window !== 'undefined') {
+  MEDUSA_BACKEND_URL = "/api";
+} else if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+  // For server-side requests, use the environment variable
   MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL;
 }
 

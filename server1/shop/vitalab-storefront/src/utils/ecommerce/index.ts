@@ -4,7 +4,17 @@ declare global {
   }
 }
 
-export const transformCategories = ({ category = {} }: { category: any }) => {
+/**
+ * Transform category tree into a format suitable for e-commerce tracking
+ * @param {Object} params - Parameters object
+ * @param {Record<string, any>} [params.category={}] - Category tree object
+ * @returns {Record<string, string>} Transformed categories
+ */
+export const transformCategories = ({ 
+  category = {} 
+}: { 
+  category?: Record<string, any> 
+}): Record<string, string> => {
   if (!category) {
     return {}
   }
@@ -22,6 +32,13 @@ export const transformCategories = ({ category = {} }: { category: any }) => {
   return result
 }
 
+/**
+ * Track e-commerce events using dataLayer
+ * @param {Object} params - Parameters object
+ * @param {string} params.event - Event name
+ * @param {string} params.cardId - Cart ID
+ * @param {Record<string, unknown>} params.data - Event data
+ */
 export const eCommerce = ({
   event,
   cardId,
@@ -30,45 +47,63 @@ export const eCommerce = ({
   event: string
   cardId: string
   data: Record<string, unknown>
-}) => {
-  const dataLayer = window.dataLayer
-  const storageKey = typeof window !== "undefined" && window.process?.env?.NEXT_PUBLIC_ECOMMERCE_STORAGE_KEY 
-    ? window.process.env.NEXT_PUBLIC_ECOMMERCE_STORAGE_KEY 
-    : "medusa-ecommerce-events"
-  let sentEvents = JSON.parse(
-    localStorage.getItem(storageKey) || "{}"
-  )
+}): void => {
+  try {
+    if (typeof window === "undefined") return;
 
-  console.log("data", data)
+    const dataLayer = window.dataLayer;
+    if (!dataLayer || !data || !cardId) return;
 
-  if (typeof window !== "undefined" && dataLayer && data && cardId) {
-    if (cardId !== Object.keys(sentEvents)?.[0]) {
-      sentEvents = {}
+    const storageKey = typeof window !== "undefined" && window.process?.env?.NEXT_PUBLIC_ECOMMERCE_STORAGE_KEY 
+      ? window.process.env.NEXT_PUBLIC_ECOMMERCE_STORAGE_KEY 
+      : "medusa-ecommerce-events";
+
+    let sentEvents = {};
+    try {
+      sentEvents = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    } catch (error) {
+      // If parsing fails, start with empty object
+      sentEvents = {};
     }
 
-    const eventKey = `${cardId}-${event}`
+    if (cardId !== Object.keys(sentEvents)?.[0]) {
+      sentEvents = {};
+    }
+
+    const eventKey = `${cardId}-${event}`;
 
     if (!sentEvents[eventKey]?.includes(event)) {
-      dataLayer.push({ ecommerce: null })
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         event,
         ecommerce: data,
-      })
+      });
 
       // This line updates the sentEvents object for the current cardId
       // If sentEvents[cardId] exists, it spreads its contents into a new array
       // If it doesn't exist, it creates a new array
       // Then it adds the current event to this array
       // This ensures that each cardId has a unique list of sent events
-      sentEvents[cardId] = [...(sentEvents[cardId] || []), event]
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify(sentEvents)
-      )
+      sentEvents[cardId] = [...(sentEvents[cardId] || []), event];
+
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(sentEvents));
+      } catch (error) {
+        console.error("Error saving to localStorage:", error);
+      }
     }
+  } catch (error) {
+    console.error("Error in eCommerce tracking:", error);
   }
 }
 
+/**
+ * Track e-commerce cart events using dataLayer
+ * @param {Object} params - Parameters object
+ * @param {string} params.event - Event name
+ * @param {string} params.cardId - Cart ID
+ * @param {Record<string, unknown>} params.data - Event data
+ */
 export const eCommerceCart = ({
   event,
   cardId,
@@ -77,66 +112,75 @@ export const eCommerceCart = ({
   event: string
   cardId: string
   data: Record<string, unknown>
-}) => {
-  console.log("eCommerceCart", data)
-  const dataLayer = window.dataLayer
-  let sentEvents = JSON.parse(
-    localStorage.getItem("medusa-ecommerce-events") || "{}"
-  )
+}): void => {
+  try {
+    if (typeof window === "undefined") return;
 
-  if (typeof window !== "undefined" && dataLayer && data && cardId) {
-    if (cardId !== Object.keys(sentEvents)?.[0]) {
-      sentEvents = {}
+    const dataLayer = window.dataLayer;
+    if (!dataLayer || !data || !cardId) return;
+
+    const storageKey = "medusa-ecommerce-events";
+
+    let sentEvents = {};
+    try {
+      sentEvents = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    } catch (error) {
+      // If parsing fails, start with empty object
+      sentEvents = {};
     }
 
-    // Проверяем, является ли событие checkout или completed
-    if (event === "begin_checkout" || event === "purchase") {
-      const eventKey = `${cardId}-${event}`
+    if (cardId !== Object.keys(sentEvents)?.[0]) {
+      sentEvents = {};
+    }
 
-      // Проверяем, было ли это событие уже отправлено для данного cardId
+    // Check if the event is checkout or purchase
+    if (event === "begin_checkout" || event === "purchase") {
+      const eventKey = `${cardId}-${event}`;
+
+      // Check if this event has already been sent for this cardId
       if (!sentEvents[cardId]?.[eventKey]) {
-        dataLayer.push({ ecommerce: null })
+        dataLayer.push({ ecommerce: null });
         dataLayer.push({
           event,
           ecommerce: data,
-        })
+        });
 
-        console.log("sentEvents", sentEvents)
-        // Отмечаем событие как отправленное
-        sentEvents[cardId] = { ...(sentEvents[cardId] || {}), [eventKey]: true }
-        localStorage.setItem(
-          "medusa-ecommerce-events",
-          JSON.stringify(sentEvents)
-        )
-      } else {
-        console.log(`Event ${event} already sent for cardId: ${cardId}`)
+        // Mark the event as sent
+        sentEvents[cardId] = { ...(sentEvents[cardId] || {}), [eventKey]: true };
+
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(sentEvents));
+        } catch (error) {
+          console.error("Error saving to localStorage:", error);
+        }
       }
     } else {
-      const productId = data.items?.[0]?.item_id
+      // For other events, we need the product ID
+      const productId = data.items?.[0]?.item_id;
       if (!productId) {
-        console.error("Product ID is missing in the data")
-        return
+        console.error("Product ID is missing in the data");
+        return;
       }
 
-      const eventKey = `${cardId}-${event}-${productId}`
+      const eventKey = `${cardId}-${event}-${productId}`;
 
       if (!sentEvents[cardId]?.[eventKey]) {
-        console.log("eventKey", eventKey)
-        dataLayer.push({ ecommerce: null })
+        dataLayer.push({ ecommerce: null });
         dataLayer.push({
           event,
           ecommerce: data,
-        })
+        });
 
-        console.log("sentEvents", sentEvents)
-        sentEvents[cardId] = { ...(sentEvents[cardId] || {}), [eventKey]: true }
-        localStorage.setItem(
-          "medusa-ecommerce-events",
-          JSON.stringify(sentEvents)
-        )
-      } else {
-        console.log("Event already sent:", eventKey)
+        sentEvents[cardId] = { ...(sentEvents[cardId] || {}), [eventKey]: true };
+
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(sentEvents));
+        } catch (error) {
+          console.error("Error saving to localStorage:", error);
+        }
       }
     }
+  } catch (error) {
+    console.error("Error in eCommerceCart tracking:", error);
   }
 }

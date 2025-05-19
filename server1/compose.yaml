@@ -5,14 +5,16 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - VITALAB_DOMAIN=${VITALAB_DOMAIN}
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
       # - $PWD/site:/srv
       - caddy_data:/data
       - caddy_config:/config
       - results:/usr/share/caddy/r
-    networks:
-      - front-tier
+#    networks:
+#      - front-tier
 
 #  partners:
 #    build: partners
@@ -49,15 +51,15 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     # Make sure log colors show up correctly
     tty: true
-    networks:
-      - back-tier
+#    networks:
+#      - back-tier
 
   redis:
     image: redis:latest
     expose:
       - "6379:6379"
-    networks:
-      - back-tier
+#    networks:
+#      - back-tier
 
   # pgadmin:
   #   container_name: pgadmin
@@ -98,9 +100,9 @@ services:
       JWT_SECRET: some_jwt_secret
       COOKIE_SECRET: some_cookie_secret
       PORT: 9000
-    networks:
-      - front-tier
-      - back-tier
+#    networks:
+#      - front-tier
+#      - back-tier
     sysctls:
       - net.ipv4.ip_forward=1
     cap_add:
@@ -115,11 +117,14 @@ services:
     container_name: vitalab-storefront
     depends_on:
       - caddy
-    networks:
-      - front-tier
-      - back-tier
+#    networks:
+#      - front-tier
+#      - back-tier
     ports:
       - "8000:8000"
+    volumes:
+      - ./shop/vitalab-storefront:/app
+      - /app/node_modules
 
   db_test:
     image: postgres:latest
@@ -133,9 +138,9 @@ services:
       - POSTGRES_DB=vitalabtest
     # Make sure log colors show up correctly
     tty: true
-    networks:
-      - front-tier
-      - back-tier
+#    networks:
+#      - front-tier
+#      - back-tier
 
   db_core:
     image: postgres:latest
@@ -149,9 +154,9 @@ services:
       - POSTGRES_DB=${VITALAB_CORE_DB}
     # Make sure log colors show up correctly
     tty: true
-    networks:
-      - front-tier
-      - back-tier
+#    networks:
+#      - front-tier
+#      - back-tier
 
   meilisearch:
     container_name: meilisearch
@@ -166,9 +171,9 @@ services:
       - MEILI_DB_PATH=${MEILI_DB_PATH:-/data.ms}
     ports:
       - 7700:7700
-    networks:
-      - front-tier
-      - back-tier
+#    networks:
+#      - front-tier
+#      - back-tier
     volumes:
       - ./data7.ms:/data.ms
     restart: unless-stopped
@@ -180,9 +185,9 @@ services:
     container_name: vitalab-results
     depends_on:
       - caddy
-    networks:
-      - front-tier
-      - back-tier
+#    networks:
+#      - front-tier
+#      - back-tier
     ports:
       - "3001:3001"
 
@@ -193,9 +198,9 @@ services:
     container_name: vitalab-pay
     depends_on:
       - caddy
-    networks:
-      - front-tier
-      - back-tier
+#    networks:
+#      - front-tier
+#      - back-tier
     ports:
       - "3002:3002"
 
@@ -203,8 +208,8 @@ services:
     image: redis:latest
     expose:
       - "6380:6379"
-    networks:
-      - back-tier
+#    networks:
+#      - back-tier
 
 volumes:
   pgdata:
@@ -214,8 +219,8 @@ volumes:
   caddy_config:
   results:
 
-networks:
-  front-tier:
-    external: true
-  back-tier:
-    external: true
+#networks:
+#  front-tier:
+#    external: true
+#  back-tier:
+#    external: true
