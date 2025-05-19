@@ -9,7 +9,9 @@ if (typeof window !== 'undefined') {
   MEDUSA_BACKEND_URL = "/api";
 } else if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
   // For server-side requests, use the environment variable
-  MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL;
+  // If the URL contains "vitalab.localhost", replace it with "vitalab-core" for Docker networking
+  const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL;
+  MEDUSA_BACKEND_URL = backendUrl.replace("vitalab.localhost", "vitalab-core");
 }
 
 const queryClient = new QueryClient({

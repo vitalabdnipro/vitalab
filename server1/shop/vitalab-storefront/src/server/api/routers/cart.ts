@@ -32,18 +32,12 @@
 //   }),
 // });
 
-import { medusaClient } from "@lib/config"
+import { medusaClient, MEDUSA_BACKEND_URL } from "@lib/config"
 import axios from "axios"
 import { z } from "zod"
 
 // import { publicProcedure, router } from "../trpc"
 import { createTRPCRouter, publicProcedure } from "../trpc"
-
-let MEDUSA_BACKEND_URL = "http://localhost:9000"
-
-if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
-  MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
-}
 
 export const cartRouter = createTRPCRouter({
   add: publicProcedure
